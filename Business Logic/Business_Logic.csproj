@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Business_Logic</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChatUniverseInterface\ChatUniverseInterface.csproj" />
+    <ProjectReference Include="..\Data Acces Layer\Data_Acces_Layer.csproj" />
+  </ItemGroup>
+
+</Project>

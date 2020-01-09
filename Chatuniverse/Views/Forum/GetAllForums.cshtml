@@ -1,0 +1,27 @@
+﻿@model Chatuniverse.Models.ListForumsViewModel
+
+@{
+    ViewData["Title"] = "GetForums";
+}
+
+
+<h1>Forums</h1>
+<p class="text-muted">@ViewBag.Created</p>
+<table class="table table-hover" id="ForumListModel">
+    <tbody>
+        @foreach (var forum in Model.ForumList)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Post" asp-action="ForumPosts" asp-route-id="@forum.Id">
+                        @forum.ForumTitel
+                    </a>
+                </td>
+                <td>
+                    @forum.Desciption
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
