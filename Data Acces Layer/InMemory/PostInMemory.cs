@@ -9,7 +9,7 @@ namespace Data_Acces_Layer.InMemory
 {
     public class PostInMemory : IPostContext
     {
-        private static int id = 1;
+        private static int id = 6;
         private static List<PostDTO> postdata = new List<PostDTO>();
 
         public List<PostDTO> PostData
@@ -19,11 +19,11 @@ namespace Data_Acces_Layer.InMemory
 
         public PostInMemory()
         {
-            PostDTO postdto = new PostDTO(id, "test", DateTime.Now);
-            PostDTO postdto2 = new PostDTO(id, "test2", DateTime.Now);
-            PostDTO postdto3 = new PostDTO(id, "test3", DateTime.Now);
-            PostDTO postdto4 = new PostDTO(id, "test4", DateTime.Now);
-            PostDTO postdto5 = new PostDTO(id, "test5", DateTime.Now);
+            PostDTO postdto = new PostDTO(1, "test", DateTime.Now);
+            PostDTO postdto2 = new PostDTO(2, "test2", DateTime.Now);
+            PostDTO postdto3 = new PostDTO(3, "test3", DateTime.Now);
+            PostDTO postdto4 = new PostDTO(4, "test4", DateTime.Now);
+            PostDTO postdto5 = new PostDTO(5, "test5", DateTime.Now);
             postdata.Add(postdto);
             postdata.Add(postdto2);
             postdata.Add(postdto3);
@@ -55,17 +55,17 @@ namespace Data_Acces_Layer.InMemory
 
         public List<PostDTO> GetAllPostsByForumIdDesc(int forumid)
         {
-            throw new NotImplementedException();
+            return PostData.OrderByDescending(post => post.PostTitel).ToList();
         }
 
         public List<PostDTO> GetAllPostsDesc()
         {
-            throw new NotImplementedException();
+            return PostData.OrderByDescending(post => post.PostTitel).ToList();
         }
 
         public PostDTO GetPostById(int postid)
         {
-            throw new NotImplementedException();
+            return PostData.Find(post => post.Id == id);
         }
 
         public void UpdatePost_Upvotes(int upvote, int postid)

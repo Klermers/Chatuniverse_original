@@ -42,5 +42,16 @@ namespace DTO
             Date = date;
             Upvotes = upvotes;
         }
+
+        public CommentDTO(string text)
+        {
+            Text = text;
+        }
+
+        public CommentDTO(int id, string text)
+        {
+            Id = id;
+            Text = text;
+        }
     }
 }

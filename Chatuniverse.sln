@@ -3,31 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatuniverse", "Chatuniverse\Chatuniverse.csproj", "{CE64C3CD-2405-4E8F-A15F-B667E5E56542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatuniverse", "Chatuniverse\Chatuniverse.csproj", "{CE64C3CD-2405-4E8F-A15F-B667E5E56542}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6AEE052B-747F-49B2-8CB9-CA8CC4F35B81} = {6AEE052B-747F-49B2-8CB9-CA8CC4F35B81}
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC} = {EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business_Logic", "Business Logic\Business_Logic.csproj", "{6AEE052B-747F-49B2-8CB9-CA8CC4F35B81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business_Logic", "Business Logic\Business_Logic.csproj", "{6AEE052B-747F-49B2-8CB9-CA8CC4F35B81}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC} = {EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}
 		{7F166652-E310-49ED-B255-E60484A8AAA9} = {7F166652-E310-49ED-B255-E60484A8AAA9}
 		{F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509} = {F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatUniverseInterface", "ChatUniverseInterface\ChatUniverseInterface.csproj", "{F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatUniverseInterface", "ChatUniverseInterface\ChatUniverseInterface.csproj", "{F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC} = {EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Acces_Layer", "Data Acces Layer\Data_Acces_Layer.csproj", "{7F166652-E310-49ED-B255-E60484A8AAA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data_Acces_Layer", "Data Acces Layer\Data_Acces_Layer.csproj", "{7F166652-E310-49ED-B255-E60484A8AAA9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC} = {EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}
 		{F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509} = {F520E87C-3AA9-4C1D-BD32-FCD8F4D9B509}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumDTO", "ForumDTO\ForumDTO.csproj", "{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForumDTO", "ForumDTO\ForumDTO.csproj", "{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business_LogicTests", "Business_LogicTests\Business_LogicTests.csproj", "{9C9F1F14-34B2-4BE7-AC5A-F11003A908FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAA7383B-AFDD-4F4D-8F6C-9297F4CDE1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9F1F14-34B2-4BE7-AC5A-F11003A908FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9F1F14-34B2-4BE7-AC5A-F11003A908FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9F1F14-34B2-4BE7-AC5A-F11003A908FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9F1F14-34B2-4BE7-AC5A-F11003A908FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

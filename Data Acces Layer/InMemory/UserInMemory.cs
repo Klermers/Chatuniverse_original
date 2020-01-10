@@ -9,43 +9,50 @@ namespace Data_Acces_Layer.InMemory
     public class UserInMemory : IUserContext
     {
 
+
         private static int id = 1;
         private static List<UserDTO> userdata = new List<UserDTO>();
 
-        public List<UserDTO> PostData
+        public List<UserDTO> UserData
         {
             get { return userdata; }
         }
 
         public UserInMemory()
         {
-            UserDTO userdto = new UserDTO(id, "username", "password", DateTime.Now);
+            UserDTO userdto = new UserDTO(1, "username", "password", DateTime.Now);
+            UserDTO userdto2 = new UserDTO(2, "username2", "password2", DateTime.Now);
+            UserDTO userdto3 = new UserDTO(3, "username3", "password3", DateTime.Now);
             userdata.Add(userdto);
+            userdata.Add(userdto2);
+            userdata.Add(userdto3);
         }
 
         public void CreateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            UserDTO forumdto = new UserDTO(username, password, DateTime.Now);
+            id += 1;
+            userdata.Add(forumdto);
         }
 
         public List<UserDTO> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return UserData;
         }
 
         public List<UserDTO> GetAllUsersById(int id)
         {
-            throw new NotImplementedException();
+            return UserData;
         }
 
         public UserDTO GetUserByCommentId(int commentid)
         {
-            throw new NotImplementedException();
+            return new UserDTO(100, "customuser", "custompass", DateTime.Now);
         }
 
         public UserDTO GetUserByPostId(int postid)
         {
-            throw new NotImplementedException();
+            return new UserDTO(100, "customuser", "custompass", DateTime.Now);
         }
 
         public UserDTO GetUserByUserId(int id)
