@@ -20,12 +20,7 @@ namespace Data_Acces_Layer.InMemory
 
         public UserInMemory()
         {
-            UserDTO userdto = new UserDTO(1, "username", "password", DateTime.Now);
-            UserDTO userdto2 = new UserDTO(2, "username2", "password2", DateTime.Now);
-            UserDTO userdto3 = new UserDTO(3, "username3", "password3", DateTime.Now);
-            userdata.Add(userdto);
-            userdata.Add(userdto2);
-            userdata.Add(userdto3);
+
         }
 
         public void CreateUser(string username, string password)
