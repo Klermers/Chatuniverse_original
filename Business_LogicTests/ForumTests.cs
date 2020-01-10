@@ -17,7 +17,7 @@ namespace Business_Logic.Tests
             ForumContainer forumcontainer = new ForumContainer("MEM");
             //Act
             inputforum.CreateForum();
-            Forum getforum = forumcontainer.GetForumById(forumdto.Id);
+            Forum getforum = forumcontainer.GetForumById(5);
             //Assert
             Assert.Equals(getforum, inputforum);
         }

@@ -10,9 +10,9 @@ namespace Business_Logic
 {
     public class PostContainer
     {
-        private UserContainer userContainer;
-        private IPostContainer postContainer;
-        private CommentContainer commentContainer;
+        private UserContainer userContainer = new UserContainer("SQL");
+        private IPostContainer postContainer = new Postrepository(new PostSQL());
+        private CommentContainer commentContainer = new CommentContainer("SQL");
         private string context;
 
         public List<Post> Posts

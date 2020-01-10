@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class User
     {
-        IUser userrepository;
+        IUser userrepository = new Userrepository(new UserSQL());
 
         public int Id
         {

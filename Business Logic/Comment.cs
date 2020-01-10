@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class Comment
     {
-        private ICommentRepository commentrepository;
+        private ICommentRepository commentrepository = new Commentrepository(new CommentSQL());
         private string context;
 
         public int Id

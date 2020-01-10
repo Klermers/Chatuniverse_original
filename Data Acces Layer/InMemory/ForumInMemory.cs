@@ -9,7 +9,7 @@ namespace Data_Acces_Layer.InMemory
 {
     public class ForumInMemory : IForumContext
     {
-        private static int id = 1;
+        private static int id = 5;
         private static List<ForumDTO> forumdata = new List<ForumDTO>();
 
         public List<ForumDTO> ForumData
@@ -19,10 +19,10 @@ namespace Data_Acces_Layer.InMemory
 
         public ForumInMemory()
         {
-            ForumDTO forumdto = new ForumDTO(id, "test1", "test1");
-            ForumDTO forumdto2 = new ForumDTO(id, "test2", "test2");
-            ForumDTO forumdto3 = new ForumDTO(id, "test3", "test3");
-            ForumDTO forumdto4 = new ForumDTO(id, "test4", "test4");
+            ForumDTO forumdto = new ForumDTO(1, "test1", "test1");
+            ForumDTO forumdto2 = new ForumDTO(2, "test2", "test2");
+            ForumDTO forumdto3 = new ForumDTO(3, "test3", "test3");
+            ForumDTO forumdto4 = new ForumDTO(4, "test4", "test4");
             forumdata.Add(forumdto);
             forumdata.Add(forumdto2);
             forumdata.Add(forumdto3);

@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class Post
     {
-        IPost repository;
+        IPost repository = new Postrepository(new PostSQL());
 
         public int Id
         {

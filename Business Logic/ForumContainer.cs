@@ -11,9 +11,9 @@ namespace Business_Logic
 {
     public class ForumContainer
     {
-        private IForumContainer forumrepository;
-        private PostContainer postContainer;
-        private UserContainer userContainer;
+        private IForumContainer forumrepository = new Forumrepository(new ForumSQL());
+        private PostContainer postContainer = new PostContainer("SQL");
+        private UserContainer userContainer = new UserContainer("SQL");
         private string context;
         public List<Forum> Forums
         {

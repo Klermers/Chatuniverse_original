@@ -11,8 +11,8 @@ namespace Business_Logic
 {
     public class CommentContainer
     {
-        private ICommentRepository commentContainerRepository;
-        private UserContainer userContainer;
+        private ICommentRepository commentContainerRepository = new Commentrepository(new CommentSQL());
+        private UserContainer userContainer = new UserContainer("SQL");
         private string context;
 
         public List<Comment> Comments

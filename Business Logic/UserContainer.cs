@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     class UserContainer
     {
-        private IUserContainer userRepositoryContainer;
+        private IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
         private string context;
         public List<User> Users
         {
