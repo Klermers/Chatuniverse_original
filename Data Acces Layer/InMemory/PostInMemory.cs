@@ -9,8 +9,8 @@ namespace Data_Acces_Layer.InMemory
 {
     public class PostInMemory : IPostContext
     {
-        private static int id = 1;
-        private static List<PostDTO> postdata = new List<PostDTO>();
+        private static int id = 6;
+        private List<PostDTO> postdata = new List<PostDTO>();
 
         public List<PostDTO> PostData
         {
@@ -19,7 +19,16 @@ namespace Data_Acces_Layer.InMemory
 
         public PostInMemory()
         {
-
+            PostDTO postdto = new PostDTO(1, "test", DateTime.Now);
+            PostDTO postdto2 = new PostDTO(2, "test2", DateTime.Now);
+            PostDTO postdto3 = new PostDTO(3, "test3", DateTime.Now);
+            PostDTO postdto4 = new PostDTO(4, "test4", DateTime.Now);
+            PostDTO postdto5 = new PostDTO(5, "test5", DateTime.Now);
+            postdata.Add(postdto);
+            postdata.Add(postdto2);
+            postdata.Add(postdto3);
+            postdata.Add(postdto4);
+            postdata.Add(postdto5);
         }
 
         public void CreatePost(int forumid, string titel, int userid)

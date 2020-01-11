@@ -15,7 +15,6 @@ namespace ChatUniverse.Controllers
         public IActionResult CreateForum(ForumViewModel Onpost)
         {
             Forum forum = new Forum(Onpost.ForumTitel, Onpost.Desciption, "SQl");
-
             forum.CreateForum();
             ViewBag.Created = "Forum got Created";
             return View();
@@ -29,13 +28,14 @@ namespace ChatUniverse.Controllers
         public IActionResult GetAllForums()
         {
             ForumContainer forumContainer = new ForumContainer("SQL");
-            ListForumsViewModel listForumsViewModel = new ListForumsViewModel();
+            List<ForumViewModel> forumviewmodels = new List<ForumViewModel>();
+            forumContainer.GetAllForums();
             foreach (var forum in forumContainer.Forums)
             {
                 ForumViewModel forumViewModel = new ForumViewModel(forum);
-
-                listForumsViewModel.ForumList.Add(forumViewModel);
+                forumviewmodels.Add(forumViewModel);
             }
+            ListForumsViewModel listForumsViewModel = new ListForumsViewModel(forumviewmodels);
             return View(listForumsViewModel);
         }
 

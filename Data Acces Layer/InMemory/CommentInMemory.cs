@@ -9,7 +9,7 @@ namespace Data_Acces_Layer.InMemory
     public class CommentInMemory : ICommentContext
     {
         private static int id = 1;
-        private static List<CommentDTO> commentdata = new List<CommentDTO>();
+        private List<CommentDTO> commentdata = new List<CommentDTO>();
 
         public List<CommentDTO> CommentData
         {
@@ -18,7 +18,14 @@ namespace Data_Acces_Layer.InMemory
 
         public CommentInMemory()
         {
-
+            CommentDTO commentdto = new CommentDTO("comment1");
+            CommentDTO commentdto2 = new CommentDTO("comment2");
+            CommentDTO commentdto3 = new CommentDTO("comment3");
+            CommentDTO commentdto4 = new CommentDTO("comment4");
+            commentdata.Add(commentdto);
+            commentdata.Add(commentdto2);
+            commentdata.Add(commentdto3);
+            commentdata.Add(commentdto4);
         }
 
         public void CreateComment(string comment, int postid, int userid)

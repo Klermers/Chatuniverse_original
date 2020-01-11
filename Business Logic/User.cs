@@ -55,11 +55,10 @@ namespace Business_Logic
             }
         }
 
-        public User(string username, string password, DateTime datetime, string context)
+        public User(string username, string password,string context)
         {
             Username = username;
             Password = password;
-            Date = datetime;
             if (context == "SQL")
             {
                 userrepository = new Userrepository(new UserSQL());

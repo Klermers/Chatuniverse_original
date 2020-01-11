@@ -11,7 +11,12 @@ namespace Chatuniverse.Models
         public List<ForumViewModel> ForumList
         {
             get;
-            private set;
+            set;
+        }
+
+        public ListForumsViewModel(List<ForumViewModel> forumviewmodels)
+        {
+            ForumList = forumviewmodels;
         }
     }
 }

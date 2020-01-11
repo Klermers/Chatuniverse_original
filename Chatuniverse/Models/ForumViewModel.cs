@@ -43,15 +43,21 @@ namespace Chatuniverse.Models
             Id = forum.Id;
             ForumTitel = forum.ForumTitel;
             Desciption = forum.Desciption;
-            foreach (var user in forum.Users)
+            if (forum.Users != null)
             {
-                UserViewModel userViewModel = new UserViewModel(user);
-                Users.Add(userViewModel);
+                foreach (var user in forum.Users)
+                {
+                    UserViewModel userViewModel = new UserViewModel(user);
+                    Users.Add(userViewModel);
+                }
             }
-            foreach (var post in forum.Posts)
+            if (forum.Posts != null)
             {
-                PostViewModel postViewModel = new PostViewModel(post);
-                Posts.Add(postViewModel);
+                foreach (var post in forum.Posts)
+                {
+                    PostViewModel postViewModel = new PostViewModel(post);
+                    Posts.Add(postViewModel);
+                }
             }
         }
     }
