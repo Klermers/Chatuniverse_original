@@ -19,19 +19,6 @@ namespace Chatuniverse.Controllers
 
             return View(forumPostViewModel);
         }
-        /* public PostModel GetPost(int forumid,int postid)
-         {
-             PostContainer postcontainer = new PostContainer();
-             PostDTO postdto = new PostDTO();
-             postdto = postcontainer.GetPost(forumid,postid);
-
-             return new PostModel
-             {
-                 Id = postdto.Id,
-                 Posttitel = postdto.PostTitel
-             };
-         }
-         */
         [HttpPost]
         public IActionResult CreateComment(CommentViewModel Commentmodel, int postid, int userid)
         {

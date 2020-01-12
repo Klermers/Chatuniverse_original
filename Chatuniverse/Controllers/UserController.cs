@@ -30,6 +30,7 @@ namespace Chatuniverse.Controllers
             User user = new User(onpost.Username, onpost.Password, "SQL");
             if(user.LoginUser() == true)
             {
+                HttpContext.Session.SetInt32("Id", onpost.Id);
                 HttpContext.Session.SetString("Username", onpost.Username);
                 ViewBag.Message = "You are Logged in";
             }
@@ -50,12 +51,28 @@ namespace Chatuniverse.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
-        [HttpPost]
-        public IActionResult JoinForum(int forumid, int userid)
+
+        public IActionResult JoinForum(int id)
         {
-            User user = new User(userid, "SQL");
-            user.JoinForum(forumid);
-            return View();
+            Forum forum = new Forum(id, "SQL");
+            if(HttpContext.Session.GetInt32("Id") != null)
+            {
+                int userid = (int)HttpContext.Session.GetInt32("Id");
+                User user = new User(userid, "SQL");
+                if(forum.IsUserInForum(userid) == false )
+                {
+                    user.JoinForum(id);
+                }
+                else
+                {
+                    ViewBag.Message = "You are alreasy a member of this forum.";
+                }
+            }
+            else
+            {
+                ViewBag.Message = "You aren't Loggin in";
+            }
+            return View("../Home/Index");
         }
     }
 }

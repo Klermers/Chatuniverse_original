@@ -1,10 +1,15 @@
 ﻿@model Chatuniverse.Models.ForumPostViewModel
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "GetComments";
 }
 
 <h1>GetComments</h1>
+@if (Context.Session.Get("Username") != null)
+{
+    <a asp-controller="Comment" asp-action="CreateComment">CreateComment</a>
+}
 
 @if (Model.Post.Comments != null)
 {

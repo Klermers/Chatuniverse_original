@@ -65,6 +65,18 @@ namespace Business_Logic
                 forumrepository = new Forumrepository(new ForumInMemory());
             }
         }
+        public Forum(int id, string context)
+        {
+            Id = id;
+            if (context == "SQL")
+            {
+                forumrepository = new Forumrepository(new ForumSQL());
+            }
+            else if (context == "MEM")
+            {
+                forumrepository = new Forumrepository(new ForumInMemory());
+            }
+        }
 
 
         public Forum(ForumDTO forumdto, List<Post> posts, List<User> users, string context)
@@ -99,8 +111,7 @@ namespace Business_Logic
             forumrepository.DeleteForum(Id);
         }
 
-        public bool IsUserInForum(int id
-            )
+        public bool IsUserInForum(int id)
         {
             foreach(var user in Users)
             {
