@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DTO;
 
 namespace ChatUniverseInterface
 {
@@ -13,5 +14,9 @@ namespace ChatUniverseInterface
         void JoinForum(int userid, int forumid);
 
         void UpdateUser_Password(int userid, string password);
+
+        bool LoginUser(string username, string password);
+
+
     }
 }

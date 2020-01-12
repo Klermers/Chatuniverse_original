@@ -74,5 +74,10 @@ namespace Data_Acces_Layer.InMemory
         {
             throw new NotImplementedException();
         }
+
+        public bool LoginUser(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,14 +17,40 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "INSERT INTO User(Username,Password) VALUES(@Username,@Password)";
+                string query = "INSERT INTO User(Username,Password,Date) VALUES(@Username,@Password,@Date)";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Username", username);
                     cmd.Parameters.AddWithValue("@Password", password);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public bool LoginUser(string username, string password)
+        {
+            UserDTO userdto = new UserDTO();
+            using (conn = new MySqlConnection(connectionstring))
+            {
+                conn.Open();
+                string query = "SELECT * FROM User WHERE Username = @Username AND Password = @Password";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Prepare();
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    if ((int)cmd.ExecuteScalar() > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+            } 
         }
 
         public List<UserDTO> GetAllUsers()
@@ -52,7 +78,7 @@ namespace Data_Acces_Layer.SQL
             return userdtos;
         }
 
-        public List<UserDTO> GetAllUsersById(int id)
+        public List<UserDTO> GetAllUsersById(int forumid)
         {
             List<UserDTO> userdtos = new List<UserDTO>();
             using (conn = new MySqlConnection(connectionstring))
@@ -61,7 +87,7 @@ namespace Data_Acces_Layer.SQL
                 string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.Forumid = @ForumId";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@ForumId", id);
+                    cmd.Parameters.AddWithValue("@ForumId", forumid);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {

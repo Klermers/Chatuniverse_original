@@ -41,6 +41,11 @@ namespace Chatuniverse.Models
             private set;
         }
 
+        public PostViewModel()
+        {
+
+        }
+
         public PostViewModel(Post post)
         {
             Id = post.Id;
@@ -48,10 +53,13 @@ namespace Chatuniverse.Models
             Date = post.Date;
             Upvotes = post.Upvotes;
             User = new UserViewModel(post.User);
-            foreach (var comment in post.Comments)
+            if(post.Comments != null)
             {
-                CommentViewModel commentViewModel = new CommentViewModel(comment);
-                Comments.Add(commentViewModel);
+                foreach (var comment in post.Comments)
+                {
+                    CommentViewModel commentViewModel = new CommentViewModel(comment);
+                    Comments.Add(commentViewModel);
+                }
             }
         }
 

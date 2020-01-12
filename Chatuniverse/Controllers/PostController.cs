@@ -8,7 +8,7 @@ using Chatuniverse.Models;
 using Data_Acces_Layer;
 using DTO;
 
-namespace ChatUniverse.Controllers
+namespace Chatuniverse.Controllers
 {
     public class PostController : Controller
     {

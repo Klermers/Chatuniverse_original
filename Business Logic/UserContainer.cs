@@ -9,7 +9,7 @@ using ChatUniverseInterface;
 
 namespace Business_Logic
 {
-    class UserContainer
+    public class UserContainer
     {
         private IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
         private string context;

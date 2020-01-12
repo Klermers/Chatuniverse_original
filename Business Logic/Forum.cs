@@ -98,6 +98,19 @@ namespace Business_Logic
         {
             forumrepository.DeleteForum(Id);
         }
+
+        public bool IsUserInForum(int id
+            )
+        {
+            foreach(var user in Users)
+            {
+                if(user.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
 

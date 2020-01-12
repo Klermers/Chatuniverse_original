@@ -51,5 +51,12 @@ namespace DTO
             CreationDate = creationdate;
         }
 
+        public UserDTO(int id, string username, string password)
+        {
+            Id = id;
+            Username = username;
+            Password = password;
+        }
+
     }
 }

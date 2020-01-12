@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Chatuniverse.Models;
 using Business_Logic;
+using Microsoft.AspNetCore.Http;
 
 namespace Chatuniverse.Controllers
 {
     public class UserController : Controller
     {
         [HttpPost]
-        public IActionResult CreateUser(UserViewModel onpost)
+        public IActionResult CreateUser(UserViewModel Onpost)
         {
-            User user = new User(onpost.Username, onpost.Password, "SQL");
+            User user = new User(Onpost.Username, Onpost.Password, "SQL");
             user.CreateUser();
             return View();
         }
@@ -26,18 +27,33 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult Login(UserViewModel onpost)
         {
+            User user = new User(onpost.Username, onpost.Password, "SQL");
+            if(user.LoginUser() == true)
+            {
+                HttpContext.Session.SetString("Username", onpost.Username);
+            }
+            else
+            {
+                ViewBag.Message = "Wrong username Or/and Password";
+            }
             return View();
         }
 
-        public IActionResult Login()
+        public ActionResult Login()
         {
-
             return View();
         }
 
         public IActionResult Logout()
         {
-
+            HttpContext.Session.Clear();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult JoinForum(int forumid, int userid)
+        {
+            User user = new User(userid, "SQL");
+            user.JoinForum(forumid);
             return View();
         }
     }

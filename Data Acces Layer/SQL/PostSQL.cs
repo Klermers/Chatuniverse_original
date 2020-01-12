@@ -73,7 +73,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = @forumid ORDER BY post.posttitel";
+                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.Id WHERE post.forum =@forumid  ORDER BY post.posttitel";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@forumid", forumid);
@@ -84,7 +84,6 @@ namespace Data_Acces_Layer.SQL
                         postdto.Id = reader.GetInt32(0);
                         postdto.PostTitel = reader.GetString(1);
                         postdto.Date = reader.GetDateTime(2);
-                        postdto.Upvotes = reader.GetInt32(3);
                         postdtos.Add(postdto);
                     }
                 }
@@ -147,7 +146,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * from post WHERE [id] = @id";
+                string query = "SELECT * from post WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", postid);
@@ -157,7 +156,6 @@ namespace Data_Acces_Layer.SQL
                         postdto.Id = reader.GetInt32(0);
                         postdto.PostTitel = reader.GetString(1);
                         postdto.Date = reader.GetDateTime(2);
-                        postdto.Upvotes = reader.GetInt32(3);
                     }
                 }
             }

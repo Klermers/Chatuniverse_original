@@ -84,10 +84,16 @@ namespace Business_Logic
             userrepository.JoinForum(Id, forumid);
         }
 
+        public bool LoginUser()
+        {
+           return  userrepository.LoginUser(Username, Password);
+        }
+
         public void UpdateUser_Password(string password)
         {
             userrepository.UpdateUser_Password(Id, password);
         }
+
     }
 
 }

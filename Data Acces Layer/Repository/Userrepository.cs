@@ -58,5 +58,10 @@ namespace Data_Acces_Layer.Repository
         {
             return this.context.GetUserByCommentId(commentid);
         }
+
+        public bool LoginUser(string username, string password)
+        {
+            return this.context.LoginUser(username, password);
+        }
     }
 }

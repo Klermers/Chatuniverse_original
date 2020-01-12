@@ -44,7 +44,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "DELETE FROM forum WHERE [id] = @id;";
+                string query = "DELETE FROM forum WHERE [id] = @id";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -61,11 +61,11 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * from forum WHERE [id] = @id";
+                string query = "SELECT * from forum WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
-                    var reader = cmd.ExecuteReader(); ;
+                    var reader = cmd.ExecuteReader(); 
                     while (reader.Read())
                     {
                         forumdto.Id = reader.GetInt32(0);

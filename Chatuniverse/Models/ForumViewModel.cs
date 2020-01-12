@@ -53,11 +53,14 @@ namespace Chatuniverse.Models
             }
             if (forum.Posts != null)
             {
+                List<PostViewModel> posts = new List<PostViewModel>();
                 foreach (var post in forum.Posts)
                 {
                     PostViewModel postViewModel = new PostViewModel(post);
-                    Posts.Add(postViewModel);
+                    posts.Add(postViewModel);
                 }
+
+                Posts = posts;
             }
         }
     }

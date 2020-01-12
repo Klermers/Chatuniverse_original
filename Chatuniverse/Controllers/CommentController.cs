@@ -7,7 +7,7 @@ using Chatuniverse.Models;
 using Business_Logic;
 using DTO;
 
-namespace ChatUniverse.Controllers
+namespace Chatuniverse.Controllers
 {
     public class CommentController : Controller
     {
@@ -15,7 +15,7 @@ namespace ChatUniverse.Controllers
         {
             ForumContainer forumContainer = new ForumContainer("SQL");
             PostContainer postContainer = new PostContainer("SQL");
-            ForumPostViewModel forumPostViewModel = new ForumPostViewModel(forumContainer.GetForumById(forumid), postContainer.GetPostById(forumid));
+            ForumPostViewModel forumPostViewModel = new ForumPostViewModel(forumContainer.GetForumById(forumid), postContainer.GetPostById(id));
 
             return View(forumPostViewModel);
         }

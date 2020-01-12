@@ -18,19 +18,24 @@ namespace Chatuniverse.Models
         public string Username
         {
             get;
-            private set;
+            set;
         }
         [Required]
         [DataType(DataType.Password)]
         public string Password
         {
             get;
-            private set;
+            set;
         }
         public DateTime Date
         {
             get;
             private set;
+        }
+
+        public UserViewModel()
+        {
+
         }
 
         public UserViewModel(User user)

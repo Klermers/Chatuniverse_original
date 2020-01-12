@@ -29,6 +29,11 @@ namespace Chatuniverse.Models
             private set;
         }
 
+        public CommentViewModel()
+        {
+
+        }
+
         public CommentViewModel(Comment comment)
         {
             Id = comment.Id;

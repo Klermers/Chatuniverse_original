@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Business_Logic;
 using DTO;
 
-namespace ChatUniverse.Controllers
+namespace Chatuniverse.Controllers
 {
     public class ForumController : Controller
     {
