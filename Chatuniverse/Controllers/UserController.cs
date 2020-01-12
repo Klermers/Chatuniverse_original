@@ -31,6 +31,7 @@ namespace Chatuniverse.Controllers
             if(user.LoginUser() == true)
             {
                 HttpContext.Session.SetString("Username", onpost.Username);
+                ViewBag.Message = "You are Logged in";
             }
             else
             {
@@ -47,7 +48,7 @@ namespace Chatuniverse.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return View();
+            return RedirectToAction("Login");
         }
         [HttpPost]
         public IActionResult JoinForum(int forumid, int userid)

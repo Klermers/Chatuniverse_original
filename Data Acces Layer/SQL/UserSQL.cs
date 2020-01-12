@@ -40,11 +40,18 @@ namespace Data_Acces_Layer.SQL
                     cmd.Prepare();
                     cmd.Parameters.AddWithValue("@Username", username);
                     cmd.Parameters.AddWithValue("@Password", password);
-                    if ((int)cmd.ExecuteScalar() > 0)
+                    try
                     {
-                        return true;
+                        if ((int)cmd.ExecuteScalar() > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
-                    else
+                    catch(NullReferenceException)
                     {
                         return false;
                     }

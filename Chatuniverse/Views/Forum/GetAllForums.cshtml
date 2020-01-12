@@ -4,8 +4,8 @@
     ViewData["Title"] = "GetForums";
 }
 
-
 <h1>Forums</h1>
+<a asp-controller="Forum" asp-action="CreateForum">CreateForum</a>
 <p class="text-muted">@ViewBag.Created</p>
 <table class="table table-hover" id="ForumListModel">
     <tbody>

@@ -6,8 +6,8 @@
 }
 
 <h1>ForumPosts</h1>
-    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Id">CreateForm</a>
-    <a asp-controller="User" asp-action="JoinForum" asp-route-id="@Model.Id">CreateForm</a>
+<a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Id">CreateForm</a>
+<a asp-controller="User" asp-action="JoinForum" asp-route-id="@Model.Id">CreateForm</a>
 
 @if (Model.Posts.Any())
 {
