@@ -113,11 +113,14 @@ namespace Business_Logic
 
         public bool IsUserInForum(int id)
         {
-            foreach(var user in Users)
+            if(Users != null)
             {
-                if(user.Id == id)
+                foreach (var user in Users)
                 {
-                    return true;
+                    if (user.Id == id)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

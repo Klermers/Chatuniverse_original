@@ -6,13 +6,13 @@
 }
 
 <h1>ForumPosts</h1>
-<p class=" = text-muted">@ViewBag.Message  </p>
+<p class=" = text-muted">@TempData["login"]  </p>
 @if (Context.Session.Get("Username") != null)
 {
-    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Id">CreateForm</a>
+    <a asp-controller="User" asp-action="JoinForum" asp-route-id="@Model.Id">JoinForum</a>
+    <a asp-controller="Post" asp-action="CreatePost" asp-route-id="@Model.Id">CreatePost</a>
 }
 
-<a asp-controller="User" asp-action="JoinForum" asp-route-id="@Model.Id">JoinForum</a>
 @if (Model.Posts.Any())
 {
     <table class="table table-hover table-bordered" id="ForumModel">

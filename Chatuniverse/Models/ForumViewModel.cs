@@ -45,11 +45,13 @@ namespace Chatuniverse.Models
             Desciption = forum.Desciption;
             if (forum.Users != null)
             {
+                List<UserViewModel> users = new List<UserViewModel>();
                 foreach (var user in forum.Users)
                 {
                     UserViewModel userViewModel = new UserViewModel(user);
-                    Users.Add(userViewModel);
+                    users.Add(userViewModel);
                 }
+                Users = users;
             }
             if (forum.Posts != null)
             {
@@ -59,7 +61,6 @@ namespace Chatuniverse.Models
                     PostViewModel postViewModel = new PostViewModel(post);
                     posts.Add(postViewModel);
                 }
-
                 Posts = posts;
             }
         }

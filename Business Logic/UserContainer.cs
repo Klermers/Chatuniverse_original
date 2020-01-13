@@ -44,7 +44,6 @@ namespace Business_Logic
                 users.Add(user);
 
             }
-
             Users = users;
         }
 
@@ -83,6 +82,14 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByCommentId(commentid);
+            User user = new User(userdto, context);
+            return user;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            UserDTO userdto = new UserDTO();
+            userdto = userRepositoryContainer.GetUserByUsername(username);
             User user = new User(userdto, context);
             return user;
         }

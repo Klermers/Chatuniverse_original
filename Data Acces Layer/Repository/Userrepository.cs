@@ -63,5 +63,10 @@ namespace Data_Acces_Layer.Repository
         {
             return this.context.LoginUser(username, password);
         }
+
+        public UserDTO GetUserByUsername(string username)
+        {
+            return this.context.GetUserByUsername(username);
+        }
     }
 }

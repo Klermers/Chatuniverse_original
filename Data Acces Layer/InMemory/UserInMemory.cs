@@ -79,5 +79,10 @@ namespace Data_Acces_Layer.InMemory
         {
             throw new NotImplementedException();
         }
+
+        public UserDTO GetUserByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,6 +17,5 @@ namespace ChatUniverseInterface
 
         bool LoginUser(string username, string password);
 
-
     }
 }

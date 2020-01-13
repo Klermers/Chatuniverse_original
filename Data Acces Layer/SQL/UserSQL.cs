@@ -194,7 +194,6 @@ namespace Data_Acces_Layer.SQL
                     cmd.Parameters.AddWithValue("@ForumId", forumid);
                     cmd.Parameters.AddWithValue("@UserId", userid);
                     cmd.ExecuteNonQuery();
-
                 }
             }
         }
@@ -228,6 +227,31 @@ namespace Data_Acces_Layer.SQL
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public UserDTO GetUserByUsername(string username)
+        {
+            UserDTO userdto = new UserDTO();
+            using (conn = new MySqlConnection(connectionstring))
+            {
+                conn.Open();
+                string query = "SELECT * FROM user WHERE user.Username = @Username";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        userdto.Id = reader.GetInt32(0);
+                        userdto.Username = reader.GetString(1);
+                        userdto.Password = reader.GetString(2);
+                        userdto.CreationDate = reader.GetDateTime(3);
+                    }
+
+                }
+            }
+
+            return userdto;
         }
     }
 }

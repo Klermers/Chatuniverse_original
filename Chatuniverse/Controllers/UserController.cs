@@ -28,9 +28,10 @@ namespace Chatuniverse.Controllers
         public IActionResult Login(UserViewModel onpost)
         {
             User user = new User(onpost.Username, onpost.Password, "SQL");
+            UserContainer usercontainer = new UserContainer("SQL");
             if(user.LoginUser() == true)
             {
-                HttpContext.Session.SetInt32("Id", onpost.Id);
+                HttpContext.Session.SetInt32("Id", usercontainer.GetUserByUsername(onpost.Username).Id) ;
                 HttpContext.Session.SetString("Username", onpost.Username);
                 ViewBag.Message = "You are Logged in";
             }
@@ -54,8 +55,9 @@ namespace Chatuniverse.Controllers
 
         public IActionResult JoinForum(int id)
         {
-            Forum forum = new Forum(id, "SQL");
-            if(HttpContext.Session.GetInt32("Id") != null)
+            ForumContainer forumcontainer = new ForumContainer("SQL");
+            Forum forum = forumcontainer.GetForumById(id);
+            if (HttpContext.Session.GetInt32("Id") != null)
             {
                 int userid = (int)HttpContext.Session.GetInt32("Id");
                 User user = new User(userid, "SQL");
@@ -65,14 +67,14 @@ namespace Chatuniverse.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "You are alreasy a member of this forum.";
+                    TempData["login"] = "You are alreasy a member of this forum.";
                 }
             }
             else
             {
-                ViewBag.Message = "You aren't Loggin in";
+                TempData["login"] =  "You aren't Logged in";
             }
-            return View("../Home/Index");
+            return RedirectToAction("ForumPosts", "Post", new { id= id });
         }
     }
 }

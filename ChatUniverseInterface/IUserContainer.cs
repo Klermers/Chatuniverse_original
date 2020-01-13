@@ -17,5 +17,7 @@ namespace ChatUniverseInterface
 
         UserDTO GetUserByCommentId(int commentid);
 
+        UserDTO GetUserByUsername(string username);
+
     }
 }

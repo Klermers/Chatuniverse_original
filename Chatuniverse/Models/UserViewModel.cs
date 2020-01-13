@@ -33,6 +33,12 @@ namespace Chatuniverse.Models
             private set;
         }
 
+        public bool IsUserForumMember
+        {
+            get;
+            private set;
+        }
+
         public UserViewModel()
         {
 
@@ -44,6 +50,15 @@ namespace Chatuniverse.Models
             Username = user.Username;
             Password = user.Password;
             Date = user.Date;
+        }
+
+        public UserViewModel(User user, bool isuserforummember)
+        {
+            Id = user.Id;
+            Username = user.Username;
+            Password = user.Password;
+            Date = user.Date;
+            IsUserForumMember = IsUserForumMember;
         }
 
         public UserViewModel(string username, string password)
