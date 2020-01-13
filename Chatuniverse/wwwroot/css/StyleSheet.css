@@ -4,6 +4,10 @@
     font-family:'Comic Sans MS'
 }
 
+a{
+    color:green;
+}
+
 
 body {  
     background-color: lightyellow;
@@ -20,7 +24,7 @@ html {
     }
 }
 
-.button{
+.btn-primary {
     background-color: gold
 }
 

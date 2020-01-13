@@ -35,25 +35,11 @@ namespace DTO
 
         }
 
-        public PostDTO(int id, string posttitel, DateTime date, int upvotes)
-        {
-            Id = id;
-            PostTitel = posttitel;
-            Date = date;
-            Upvotes = upvotes;
-        }
-
         public PostDTO(int id, string posttitel, DateTime date)
         {
             Id = id;
             PostTitel = posttitel;
             Date = date;
         }
-
-        public PostDTO(int id)
-        {
-            Id = id;
-        }
-
     }
 }

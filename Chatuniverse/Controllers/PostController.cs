@@ -17,12 +17,11 @@ namespace Chatuniverse.Controllers
         public IActionResult CreatePost(PostViewModel postmodel, int forumid, int userid)
         {
             PostDTO postdto = new PostDTO();
-            ForumDTO forumdto = new ForumDTO(forumid);
             postdto.PostTitel = postmodel.Posttitel;
 
             Post post = new Post(postmodel.Posttitel, postmodel.Date, "SQL");
 
-            post.CreatePost(forumdto.Id, userid);
+            post.CreatePost(forumid, userid);
 
             return View();
         }

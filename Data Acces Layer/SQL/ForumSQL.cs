@@ -22,8 +22,6 @@ namespace Data_Acces_Layer.SQL
         }
         */
 
-
-
         public void CreateForum(string name, string description)
         {
             using (conn = new MySqlConnection(connectionstring))
@@ -68,9 +66,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader(); 
                     while (reader.Read())
                     {
-                        forumdto.Id = reader.GetInt32(0);
-                        forumdto.Name = reader.GetString(0);
-                        forumdto.Description = reader.GetString(4);
+                        int Id = reader.GetInt32(0);
+                        string Name = reader.GetString(1);
+                        string Description = reader.GetString(4);
+                        forumdto = new ForumDTO(Id,Name,Description);
                     }
                 }
             }
@@ -105,11 +104,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        ForumDTO forumdto = new ForumDTO();
-                        forumdto.Id = reader.GetInt32(0);
-                        forumdto.Name = reader.GetString(1);
-                        forumdto.Description = reader.GetString(4);
-
+                        int Id = reader.GetInt32(0);
+                        string Name = reader.GetString(1);
+                        string Description = reader.GetString(4);
+                        ForumDTO forumdto = new ForumDTO(Id,Name,Description);
                         forumdtos.Add(forumdto);
                     }
 
@@ -130,11 +128,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        ForumDTO forumdto = new ForumDTO();
-                        forumdto.Id = reader.GetInt32(0);
-                        forumdto.Name = reader.GetString(1);
-                        forumdto.Description = reader.GetString(4);
-
+                        int Id = reader.GetInt32(0);
+                        string Name = reader.GetString(1);
+                        string Description = reader.GetString(4);
+                        ForumDTO forumdto = new ForumDTO(Id,Name,Description);
                         forumdtos.Add(forumdto);
                     }
 

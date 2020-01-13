@@ -72,11 +72,11 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        UserDTO userdto = new UserDTO();
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        UserDTO userdto = new UserDTO(Id,Username,Password,CreationDate);
                         userdtos.Add(userdto);
                     }
 
@@ -98,11 +98,11 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        UserDTO userdto = new UserDTO();
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        UserDTO userdto = new UserDTO(Id, Username, Password, CreationDate);
                         userdtos.Add(userdto);
                     }
 
@@ -124,10 +124,11 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
 
                 }
@@ -148,10 +149,11 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
 
                 }
@@ -172,10 +174,11 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
 
                 }
@@ -242,15 +245,15 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        userdto.Id = reader.GetInt32(0);
-                        userdto.Username = reader.GetString(1);
-                        userdto.Password = reader.GetString(2);
-                        userdto.CreationDate = reader.GetDateTime(3);
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
 
                 }
             }
-
             return userdto;
         }
     }

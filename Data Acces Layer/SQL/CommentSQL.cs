@@ -56,11 +56,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        CommentDTO commentdto = new CommentDTO();
-                        commentdto.Id = reader.GetInt32(0);
-                        commentdto.Text = reader.GetString(1);
-                        commentdto.Date = reader.GetDateTime(2);
-                        commentdto.Upvotes = reader.GetInt32(3);
+                        int Id = reader.GetInt32(0);
+                        string Text = reader.GetString(1);
+                        DateTime Date = reader.GetDateTime(2);
+                        CommentDTO commentdto = new CommentDTO(Id,Text,Date);
 
                         commentdtos.Add(commentdto);
                     }

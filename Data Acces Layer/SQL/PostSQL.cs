@@ -80,10 +80,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        PostDTO postdto = new PostDTO();
-                        postdto.Id = reader.GetInt32(0);
-                        postdto.PostTitel = reader.GetString(1);
-                        postdto.Date = reader.GetDateTime(2);
+                        int Id = reader.GetInt32(0);
+                        string PostTitel = reader.GetString(1);
+                        DateTime Date = reader.GetDateTime(2);
+                        PostDTO postdto = new PostDTO(Id,PostTitel,Date);
                         postdtos.Add(postdto);
                     }
                 }
@@ -104,11 +104,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        PostDTO postdto = new PostDTO();
-                        postdto.Id = reader.GetInt32(0);
-                        postdto.PostTitel = reader.GetString(1);
-                        postdto.Date = reader.GetDateTime(2);
-                        postdto.Upvotes = reader.GetInt32(3);
+                        int Id = reader.GetInt32(0);
+                        string PostTitel = reader.GetString(1);
+                        DateTime Date = reader.GetDateTime(2);
+                        PostDTO postdto = new PostDTO(Id, PostTitel, Date);
                         postdtos.Add(postdto);
                     }
                 }
@@ -128,11 +127,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        PostDTO postdto = new PostDTO();
-                        postdto.Id = reader.GetInt32(0);
-                        postdto.PostTitel = reader.GetString(1);
-                        postdto.Date = reader.GetDateTime(2);
-                        postdto.Upvotes = reader.GetInt32(3);
+                        int Id = reader.GetInt32(0);
+                        string PostTitel = reader.GetString(1);
+                        DateTime Date = reader.GetDateTime(2);
+                        PostDTO postdto = new PostDTO(Id, PostTitel, Date);
                         postdtos.Add(postdto);
                     }
                 }
@@ -153,9 +151,10 @@ namespace Data_Acces_Layer.SQL
                     var reader = cmd.ExecuteReader(); ;
                     while (reader.Read())
                     {
-                        postdto.Id = reader.GetInt32(0);
-                        postdto.PostTitel = reader.GetString(1);
-                        postdto.Date = reader.GetDateTime(2);
+                        int Id = reader.GetInt32(0);
+                        string PostTitel = reader.GetString(1);
+                        DateTime Date = reader.GetDateTime(2);
+                        postdto = new PostDTO(Id,PostTitel,Date);
                     }
                 }
             }

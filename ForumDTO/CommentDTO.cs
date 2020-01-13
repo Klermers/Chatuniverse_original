@@ -35,22 +35,15 @@ namespace DTO
 
         }
 
-        public CommentDTO(int id, string text, DateTime date, int upvotes)
+        public CommentDTO(int id, string text, DateTime date)
         {
             Id = id;
             Text = text;
             Date = date;
-            Upvotes = upvotes;
         }
 
         public CommentDTO(string text)
         {
-            Text = text;
-        }
-
-        public CommentDTO(int id, string text)
-        {
-            Id = id;
             Text = text;
         }
     }

@@ -35,10 +35,5 @@ namespace DTO
             Name = name;
             Description = description;
         }
-
-        public ForumDTO(int id)
-        {
-            Id = id;
-        }
     }
 }
