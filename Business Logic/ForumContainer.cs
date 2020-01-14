@@ -12,8 +12,8 @@ namespace Business_Logic
     public class ForumContainer
     {
         private IForumContainer forumrepository = new Forumrepository(new ForumSQL());
-        private PostContainer postContainer = new PostContainer("SQL");
-        private UserContainer userContainer = new UserContainer("SQL");
+        private PostContainer postContainer = new PostContainer();
+        private UserContainer userContainer = new UserContainer();
         private string context;
         public List<Forum> Forums
         {
@@ -21,22 +21,15 @@ namespace Business_Logic
             private set;
         }
 
-        public ForumContainer(string context)
+        public ForumContainer()
         {
-            if (context == "SQL")
-            {
-                this.context = context;
-                forumrepository = new Forumrepository(new ForumSQL());
-                postContainer = new PostContainer(context);
-                userContainer = new UserContainer(context);
-            }
-            else if (context == "MEM")
-            {
-                this.context = context;
-                forumrepository = new Forumrepository(new ForumInMemory());
-                postContainer = new PostContainer(context);
-                userContainer = new UserContainer(context);
-            }
+        }
+
+        public ForumContainer(IForumRepository forum)
+        {
+            forumrepository = forum;
+            postContainer = new PostContainer(context);
+            userContainer = new UserContainer(context);
         }
 
         public void GetAllForums()

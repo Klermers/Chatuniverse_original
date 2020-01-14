@@ -55,7 +55,7 @@ namespace Chatuniverse.Controllers
 
         public IActionResult JoinForum(int id)
         {
-            ForumContainer forumcontainer = new ForumContainer("SQL");
+            ForumContainer forumcontainer = new ForumContainer();
             Forum forum = forumcontainer.GetForumById(id);
             if (HttpContext.Session.GetInt32("Id") != null)
             {

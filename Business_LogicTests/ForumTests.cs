@@ -3,6 +3,8 @@ using Business_Logic;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Data_Acces_Layer.Repository;
+using Data_Acces_Layer.InMemory;
 
 namespace Business_Logic.Tests
 {
@@ -14,7 +16,8 @@ namespace Business_Logic.Tests
         {
             //Arrange
             Forum inputforum = new Forum("test", "Dit is een unit test", "MEM");
-            ForumContainer forumcontainer = new ForumContainer("MEM");
+           
+            ForumContainer forumcontainer = new ForumContainer(new Forumrepository(new ForumInMemory()));
             //Act
             inputforum.CreateForum();
             Forum getforum = forumcontainer.GetForumById(5);
