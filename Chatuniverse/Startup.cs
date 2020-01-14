@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using ChatUniverseInterface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,7 +35,10 @@ namespace Chatuniverse
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-
+            string DefaultConnection = Configuration.GetConnectionString("DefaultConnection");
+            string CustomConntection = Configuration.GetConnectionString("CustomConntection");
+            ConnectionString.CustomConnection = CustomConntection;
+            ConnectionString.DefaultConnection = DefaultConnection;
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }
