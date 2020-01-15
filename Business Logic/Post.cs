@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class Post
     {
-        IPost repository = new Postrepository(new PostSQL());
+        IPost postrepository = new Postrepository(new PostSQL());
 
         public int Id
         {
@@ -44,51 +44,39 @@ namespace Business_Logic
             private set;
         }
 
-        public Post(PostDTO postdto, User user, List<Comment> comments, string context)
+        public Post(PostDTO postdto, User user, List<Comment> comments)
         {
             Id = postdto.Id;
             Posttitel = postdto.PostTitel;
             Date = postdto.Date;
             Upvotes = postdto.Upvotes;
             User = user;
-            if (context == "SQL")
-            {
-                repository = new Postrepository(new PostSQL());
-            }
-            else if (context == "MEM")
-            {
-                repository = new Postrepository(new PostInMemory());
-            }
         }
 
-        public Post(string posttitel, DateTime date, string context)
+        public Post(string posttitel, DateTime date)
         {
             Posttitel = posttitel;
             Date = date;
-            if (context == "SQL")
-            {
-                repository = new Postrepository(new PostSQL());
-            }
-            else if (context == "MEM")
-            {
-                repository = new Postrepository(new PostInMemory());
-            }
+        }
 
+        public Post(IPostRepository post)
+        {
+            postrepository = post;
         }
 
         public void CreatePost(int forumid, int userid)
         {
-            repository.CreatePost(forumid, Posttitel, userid);
+            postrepository.CreatePost(forumid, Posttitel, userid);
         }
 
         public void UpdatePost_Upvotes()
         {
-            repository.UpdatePost_Upvotes(Upvotes, Id);
+            postrepository.UpdatePost_Upvotes(Upvotes, Id);
         }
 
         public void DeletePost()
         {
-            repository.DeletePost(Id);
+            postrepository.DeletePost(Id);
         }
     }
 }

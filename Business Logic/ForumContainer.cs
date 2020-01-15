@@ -12,9 +12,8 @@ namespace Business_Logic
     public class ForumContainer
     {
         private IForumContainer forumrepository = new Forumrepository(new ForumSQL());
-        private PostContainer postContainer = new PostContainer();
-        private UserContainer userContainer = new UserContainer();
-        private string context;
+        private PostContainer postContainer = new PostContainer(new Postrepository(new PostSQL()),new Commentrepository(new CommentSQL()),new Userrepository(new UserSQL()));
+        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
         public List<Forum> Forums
         {
             get;
@@ -23,13 +22,14 @@ namespace Business_Logic
 
         public ForumContainer()
         {
+
         }
 
-        public ForumContainer(IForumRepository forum)
+        public ForumContainer(IForumRepository forum, IPostRepository post, IUserRepository user, ICommentRepository comment)
         {
             forumrepository = forum;
-            postContainer = new PostContainer(context);
-            userContainer = new UserContainer(context);
+            postContainer = new PostContainer(post,comment,user);
+            userContainer = new UserContainer(user);
         }
 
         public void GetAllForums()
@@ -39,7 +39,7 @@ namespace Business_Logic
             forumsdtos = forumrepository.GetAllForums();
             foreach (var forumdto in forumsdtos)
             {
-                Forum forum = new Forum(forumdto, context);
+                Forum forum = new Forum(forumdto);
                 forums.Add(forum);
             }
             Forums = forums;
@@ -52,7 +52,7 @@ namespace Business_Logic
             forumsdtos = forumrepository.GetAllForums();
             foreach (var forumdto in forumsdtos)
             {
-                Forum forum = new Forum(forumdto, context);
+                Forum forum = new Forum(forumdto);
                 forums.Add(forum);
             }
             Forums = forums;
@@ -64,7 +64,7 @@ namespace Business_Logic
             forumdto = forumrepository.GetForumById(id);
             postContainer.GetAllPostsByForumId(forumdto.Id);
             userContainer.GetAllUsersById(forumdto.Id);
-            Forum forum = new Forum(forumdto, postContainer.Posts, userContainer.Users, context);
+            Forum forum = new Forum(forumdto, postContainer.Posts, userContainer.Users);
             return forum;
         }
 

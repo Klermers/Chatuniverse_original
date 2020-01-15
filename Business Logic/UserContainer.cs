@@ -12,25 +12,20 @@ namespace Business_Logic
     public class UserContainer
     {
         private IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
-        private string context;
         public List<User> Users
         {
             get;
             private set;
         }
 
-        public UserContainer(string context)
+        public UserContainer(IUserRepository user)
         {
-            if (context == "SQL")
-            {
-                this.context = context;
-                userRepositoryContainer = new Userrepository(new UserSQL());
-            }
-            else if (context == "MEM")
-            {
-                this.context = context;
-                userRepositoryContainer = new Userrepository(new UserInMemory());
-            }
+            userRepositoryContainer = user;
+        }
+
+        public UserContainer()
+        {
+
         }
 
         public void GetAllUsersById(int forumid)
@@ -40,7 +35,7 @@ namespace Business_Logic
             userdtos = userRepositoryContainer.GetAllUsersById(forumid);
             foreach (var userdto in userdtos)
             {
-                User user = new User(userdto, context);
+                User user = new User(userdto);
                 users.Add(user);
 
             }
@@ -54,7 +49,7 @@ namespace Business_Logic
             userdtos = userRepositoryContainer.GetAllUsers();
             foreach (var userdto in userdtos)
             {
-                User user = new User(userdto, context);
+                User user = new User(userdto);
                 users.Add(user);
 
             }
@@ -66,7 +61,7 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByUserId(id);
-            User user = new User(userdto, context);
+            User user = new User(userdto);
             return user;
         }
 
@@ -74,7 +69,7 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByPostId(postid);
-            User user = new User(userdto, context);
+            User user = new User(userdto);
             return user;
         }
 
@@ -82,7 +77,7 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByCommentId(commentid);
-            User user = new User(userdto, context);
+            User user = new User(userdto);
             return user;
         }
 
@@ -90,7 +85,7 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByUsername(username);
-            User user = new User(userdto, context);
+            User user = new User(userdto);
             return user;
         }
 

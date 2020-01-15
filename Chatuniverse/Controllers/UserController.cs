@@ -27,8 +27,8 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult Login(UserViewModel onpost)
         {
-            User user = new User(onpost.Username, onpost.Password, "SQL");
-            UserContainer usercontainer = new UserContainer("SQL");
+            User user = new User(onpost.Username, onpost.Password);
+            UserContainer usercontainer = new UserContainer();
             if(user.LoginUser() == true)
             {
                 HttpContext.Session.SetInt32("Id", usercontainer.GetUserByUsername(onpost.Username).Id) ;
@@ -60,7 +60,7 @@ namespace Chatuniverse.Controllers
             if (HttpContext.Session.GetInt32("Id") != null)
             {
                 int userid = (int)HttpContext.Session.GetInt32("Id");
-                User user = new User(userid, "SQL");
+                User user = new User(userid);
                 if(forum.IsUserInForum(userid) == false )
                 {
                     user.JoinForum(id);

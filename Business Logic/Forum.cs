@@ -38,62 +38,35 @@ namespace Business_Logic
             private set;
         }
 
-        public Forum(ForumDTO forumdto, string context)
+        public Forum(ForumDTO forumdto)
         {
             Id = forumdto.Id;
             ForumTitel = forumdto.Name;
             Desciption = forumdto.Description;
-            if (context == "SQL")
-            {
-                forumrepository = new Forumrepository(new ForumSQL());
-            }
-            else if (context == "MEM")
-            {
-                forumrepository = new Forumrepository(new ForumInMemory());
-            }
         }
-        public Forum(string forumtitel, string description, string context)
+        public Forum(string forumtitel, string description)
         {
             ForumTitel = forumtitel;
             Desciption = description;
-            if (context == "SQL")
-            {
-                forumrepository = new Forumrepository(new ForumSQL());
-            }
-            else if (context == "MEM")
-            {
-                forumrepository = new Forumrepository(new ForumInMemory());
-            }
         }
-        public Forum(int id, string context)
+
+        public Forum(int id)
         {
             Id = id;
-            if (context == "SQL")
-            {
-                forumrepository = new Forumrepository(new ForumSQL());
-            }
-            else if (context == "MEM")
-            {
-                forumrepository = new Forumrepository(new ForumInMemory());
-            }
         }
 
+        public Forum(IForumRepository forum)
+        {
+            forumrepository = forum;
+        }
 
-        public Forum(ForumDTO forumdto, List<Post> posts, List<User> users, string context)
+        public Forum(ForumDTO forumdto, List<Post> posts, List<User> users)
         {
             Id = forumdto.Id;
             ForumTitel = forumdto.Name;
             Desciption = forumdto.Description;
             Posts = posts;
             Users = users;
-            if (context == "SQL")
-            {
-                forumrepository = new Forumrepository(new ForumSQL());
-            }
-            else if (context == "MEM")
-            {
-                forumrepository = new Forumrepository(new ForumInMemory());
-            }
         }
 
         public void CreateForum()

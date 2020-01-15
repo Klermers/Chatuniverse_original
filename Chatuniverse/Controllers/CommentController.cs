@@ -13,8 +13,8 @@ namespace Chatuniverse.Controllers
     {
         public ActionResult GetComments(int id, int forumid)
         {
-            ForumContainer forumContainer = new ForumContainer("SQL");
-            PostContainer postContainer = new PostContainer("SQL");
+            ForumContainer forumContainer = new ForumContainer();
+            PostContainer postContainer = new PostContainer();
             ForumPostViewModel forumPostViewModel = new ForumPostViewModel(forumContainer.GetForumById(forumid), postContainer.GetPostById(id));
 
             return View(forumPostViewModel);
@@ -22,7 +22,7 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreateComment(CommentViewModel Commentmodel, int postid, int userid)
         {
-            Comment comment = new Comment(Commentmodel.Text, "SQL");
+            Comment comment = new Comment(Commentmodel.Text);
 
             comment.CreateComment(postid, userid);
             return View();

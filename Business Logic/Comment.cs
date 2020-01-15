@@ -35,37 +35,22 @@ namespace Business_Logic
             private set;
         }
 
-        public Comment(CommentDTO commentdto, User user, string context)
+        public Comment(CommentDTO commentdto, User user)
         {
             Id = commentdto.Id;
             Text = commentdto.Text;
             Upvotes = commentdto.Upvotes;
             User = user;
-            if (context == "SQL")
-            {
-                this.context = context;
-                commentrepository = new Commentrepository(new CommentSQL());
-            }
-            else if (context == "MEM")
-            {
-                this.context = context;
-                commentrepository = new Commentrepository(new CommentInMemory());
-            }
         }
 
-        public Comment(string text, string context)
+        public Comment(string text)
         {
             Text = text;
-            if (context == "SQL")
-            {
-                this.context = context;
-                commentrepository = new Commentrepository(new CommentSQL());
-            }
-            else if (context == "MEM")
-            {
-                this.context = context;
-                commentrepository = new Commentrepository(new CommentInMemory());
-            }
+        }
+
+        public Comment(ICommentRepository comment)
+        {
+            commentrepository = comment;
         }
 
         public void CreateComment(int postid, int userid)

@@ -34,7 +34,7 @@ namespace Business_Logic
             private set;
         }
 
-        public User(UserDTO userdto, string context)
+        public User(UserDTO userdto)
         {
             Id = userdto.Id;
             Username = userdto.Username;
@@ -42,31 +42,20 @@ namespace Business_Logic
             Date = userdto.CreationDate;
         }
 
-        public User(int userid, string context)
+        public User(int userid)
         {
             Id = userid;
-            if (context == "SQL")
-            {
-                userrepository = new Userrepository(new UserSQL());
-            }
-            else if (context == "MEM")
-            {
-                userrepository = new Userrepository(new UserInMemory());
-            }
         }
 
-        public User(string username, string password,string context)
+        public User(string username, string password)
         {
             Username = username;
             Password = password;
-            if (context == "SQL")
-            {
-                userrepository = new Userrepository(new UserSQL());
-            }
-            else if (context == "MEM")
-            {
-                userrepository = new Userrepository(new UserInMemory());
-            }
+        }
+
+        public User(IUserRepository user)
+        {
+            userrepository = user;
         }
 
         public void CreateUser()

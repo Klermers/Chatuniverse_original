@@ -19,7 +19,7 @@ namespace Chatuniverse.Controllers
             PostDTO postdto = new PostDTO();
             postdto.PostTitel = postmodel.Posttitel;
 
-            Post post = new Post(postmodel.Posttitel, postmodel.Date, "SQL");
+            Post post = new Post(postmodel.Posttitel, postmodel.Date);
 
             post.CreatePost(forumid, userid);
 
@@ -33,7 +33,7 @@ namespace Chatuniverse.Controllers
 
         public ActionResult ForumPosts(int id)
         {
-            ForumContainer forumcontainer = new ForumContainer("SQL");
+            ForumContainer forumcontainer = new ForumContainer();
 
             ForumViewModel forumViewModel = new ForumViewModel(forumcontainer.GetForumById(id));
 

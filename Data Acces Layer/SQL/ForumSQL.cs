@@ -9,18 +9,7 @@ namespace Data_Acces_Layer.SQL
     public class ForumSQL : IForumContext
     {
         MySqlConnection conn;
-        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";
-
-        public ForumSQL()
-        {
-
-        }
-
-        public ForumSQL(ConnectionString connstring)
-        {
-            connectionstring = connstring;
-        }
-        
+        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";       
 
         public void CreateForum(string name, string description)
         {

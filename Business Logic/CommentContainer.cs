@@ -12,7 +12,7 @@ namespace Business_Logic
     public class CommentContainer
     {
         private ICommentRepository commentContainerRepository = new Commentrepository(new CommentSQL());
-        private UserContainer userContainer = new UserContainer("SQL");
+        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
         private string context;
 
         public List<Comment> Comments
@@ -21,20 +21,15 @@ namespace Business_Logic
             private set;
         }
 
-        public CommentContainer(string context)
+        public CommentContainer()
         {
-            if (context == "SQL")
-            {
-                this.context = context;
-                commentContainerRepository = new Commentrepository(new CommentSQL());
-                userContainer = new UserContainer(context);
-            }
-            else if (context == "MEM")
-            {
-                this.context = context;
-                commentContainerRepository = new Commentrepository(new CommentInMemory());
-                userContainer = new UserContainer(context);
-            }
+
+        }
+
+        public CommentContainer(ICommentRepository comment, IUserRepository user)
+        {
+            commentContainerRepository = comment;
+            userContainer = new UserContainer(user);
         }
 
         public void GetAllCommentsByPostId(int postid)
@@ -44,7 +39,7 @@ namespace Business_Logic
             commentdtos = commentContainerRepository.GetAllCommentsByPostId(postid);
             foreach (var commentdto in commentdtos)
             {
-                Comment comment = new Comment(commentdto, userContainer.GetUserByCommentId(commentdto.Id), context);
+                Comment comment = new Comment(commentdto, userContainer.GetUserByCommentId(commentdto.Id));
                 comments.Add(comment);
             }
             Comments = comments;
