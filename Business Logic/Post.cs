@@ -68,12 +68,6 @@ namespace Business_Logic
         {
             postrepository.CreatePost(forumid, Posttitel, userid);
         }
-
-        public void UpdatePost_Upvotes()
-        {
-            postrepository.UpdatePost_Upvotes(Upvotes, Id);
-        }
-
         public void DeletePost()
         {
             postrepository.DeletePost(Id);

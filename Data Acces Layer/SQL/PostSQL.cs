@@ -160,20 +160,5 @@ namespace Data_Acces_Layer.SQL
             }
             return postdto;
         }
-
-        public void UpdatePost_Upvotes(int upvote, int postid)
-        {
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "UPDATE post SET [upvotes] = [upvotes] + @upvote WHERE [id] = @id";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", postid);
-                    cmd.Parameters.AddWithValue("@upvote", upvote);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
     }
 }

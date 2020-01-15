@@ -9,8 +9,6 @@ namespace ChatUniverseInterface
     {
         void CreatePost(int forumid, string titel, int userid);
 
-        void UpdatePost_Upvotes(int upvote, int postid);
-
         void DeletePost(int id);
     }
 }

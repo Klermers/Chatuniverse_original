@@ -24,11 +24,6 @@ namespace Data_Acces_Layer.Repository
             this.context.DeletePost(id); ;
         }
 
-        public void UpdatePost_Upvotes(int upvote, int postid)
-        {
-            this.context.UpdatePost_Upvotes(upvote, postid);
-        }
-
         public PostDTO GetPostById(int postid)
         {
             return this.context.GetPostById(postid);

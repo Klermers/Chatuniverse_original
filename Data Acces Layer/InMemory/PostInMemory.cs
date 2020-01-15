@@ -67,10 +67,5 @@ namespace Data_Acces_Layer.InMemory
         {
             return PostData.Find(post => post.Id == id);
         }
-
-        public void UpdatePost_Upvotes(int upvote, int postid)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
