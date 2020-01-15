@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class UserContainer
     {
-        private IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
+        private     IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
         public List<User> Users
         {
             get;
@@ -85,6 +85,22 @@ namespace Business_Logic
         {
             UserDTO userdto = new UserDTO();
             userdto = userRepositoryContainer.GetUserByUsername(username);
+            User user = new User(userdto);
+            return user;
+        }
+
+        public User GetUserByUserId(int id)
+        {
+            UserDTO userdto = new UserDTO();
+            userdto = userRepositoryContainer.GetUserByUserId(id);
+            User user = new User(userdto);
+            return user;
+        }
+        
+        public User GetUserByForumId(int forumid, int userid)
+        {
+            UserDTO userdto = new UserDTO();
+            userdto = userRepositoryContainer.GetUserByForumId(forumid,userid);
             User user = new User(userdto);
             return user;
         }

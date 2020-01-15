@@ -212,22 +212,6 @@ namespace Data_Acces_Layer.SQL
                     cmd.Parameters.AddWithValue("@ForumId", forumid);
                     cmd.Parameters.AddWithValue("@UserId", userid);
                     cmd.ExecuteNonQuery();
-
-                }
-            }
-        }
-
-        public void UpdateUser_Password(int userid, string password)
-        {
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "UPDATE forum SET [Password] = @Password WHERE [id] = @id";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Descriptions", password);
-                    cmd.Parameters.AddWithValue("@id", userid);
-                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -252,6 +236,30 @@ namespace Data_Acces_Layer.SQL
                         userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
 
+                }
+            }
+            return userdto;
+        }
+
+        public UserDTO GetUserByForumId(int forumid, int userid)
+        {
+            UserDTO userdto = new UserDTO();
+            using (conn = new MySqlConnection(connectionstring))
+            {
+                conn.Open();
+                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ForumId", forumid);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);;
+                    }
                 }
             }
             return userdto;

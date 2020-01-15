@@ -14,7 +14,7 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreateUser(UserViewModel Onpost)
         {
-            User user = new User(Onpost.Username, Onpost.Password, "SQL");
+            User user = new User(Onpost.Username, Onpost.Password);
             user.CreateUser();
             return View();
         }

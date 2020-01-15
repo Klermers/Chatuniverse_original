@@ -14,15 +14,6 @@ namespace Business_Logic.Tests
         [TestMethod()]
         public void CreateForumTest()
         {
-            //Arrange
-            Forum inputforum = new Forum("test", "Dit is een unit test", "MEM");
-           
-            ForumContainer forumcontainer = new ForumContainer(new Forumrepository(new ForumInMemory()));
-            //Act
-            inputforum.CreateForum();
-            Forum getforum = forumcontainer.GetForumById(5);
-            //Assert
-            Assert.Equals(getforum, inputforum);
         }
     }
 }

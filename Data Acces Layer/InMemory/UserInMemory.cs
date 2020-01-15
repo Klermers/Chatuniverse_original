@@ -70,17 +70,17 @@ namespace Data_Acces_Layer.InMemory
             throw new NotImplementedException();
         }
 
-        public void UpdateUser_Password(int userid, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool LoginUser(string username, string password)
         {
             throw new NotImplementedException();
         }
 
         public UserDTO GetUserByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserByForumId(int forumid, int userid)
         {
             throw new NotImplementedException();
         }

@@ -19,5 +19,7 @@ namespace ChatUniverseInterface
 
         UserDTO GetUserByUsername(string username);
 
+        UserDTO GetUserByForumId(int forumid, int userid);
+
     }
 }

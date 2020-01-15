@@ -12,7 +12,6 @@ namespace Business_Logic
     public class Comment
     {
         private ICommentRepository commentrepository = new Commentrepository(new CommentSQL());
-        private string context;
 
         public int Id
         {
@@ -53,14 +52,30 @@ namespace Business_Logic
             commentrepository = comment;
         }
 
-        public void CreateComment(int postid, int userid)
+        public string CreateComment(int postid, int userid)
         {
-            commentrepository.CreateComment(Text, postid, User.Id);
+            if(Text.Length < 20)
+            {
+                return "You need a minimum of 20 letters";
+            }
+            else
+            {
+                commentrepository.CreateComment(Text, postid, User.Id);
+                return "Comment is created ";
+            }
         }
 
-        public void UpdateComment_Comment()
+        public string UpdateComment_Comment()
         {
-            commentrepository.UpdateComment_Comment(Id, Text);
+            if (Text.Length < 20)
+            {
+                return "You need a minimum of 20 letters";
+            }
+            else
+            {
+                commentrepository.UpdateComment_Comment(Id, Text);
+                return "Comment is Changed ";
+            }
         }
 
         public void DeleteComment()

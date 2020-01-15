@@ -24,11 +24,6 @@ namespace Data_Acces_Layer.Repository
             this.context.LeaveForum(forumid, userid);
         }
 
-        public void UpdateUser_Password(int userid, string password)
-        {
-            this.context.UpdateUser_Password(userid, password);
-        }
-
         public void JoinForum(int userid, int forumid)
         {
             this.context.JoinForum(userid, forumid);
@@ -67,6 +62,11 @@ namespace Data_Acces_Layer.Repository
         public UserDTO GetUserByUsername(string username)
         {
             return this.context.GetUserByUsername(username);
+        }
+
+        public UserDTO GetUserByForumId(int forumid, int userid)
+        {
+            return this.context.GetUserByForumId(forumid, userid);
         }
     }
 }
