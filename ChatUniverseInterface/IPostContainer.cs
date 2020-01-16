@@ -7,10 +7,6 @@ namespace ChatUniverseInterface
 {
     public interface IPostContainer
     {
-        List<PostDTO> GetAllPosts();
-
-        List<PostDTO> GetAllPostsDesc();
-
         List<PostDTO> GetAllPostsByForumId(int forumid);
 
         List<PostDTO> GetAllPostsByForumIdDesc(int forumid);

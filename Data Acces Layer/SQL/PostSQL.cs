@@ -43,30 +43,6 @@ namespace Data_Acces_Layer.SQL
             }
         }
 
-        public List<PostDTO> GetAllPosts()
-        {
-            List<PostDTO> postdtos = new List<PostDTO>();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.id ORDER BY post.posttitel";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        PostDTO postdto = new PostDTO();
-                        postdto.Id = reader.GetInt32(0);
-                        postdto.PostTitel = reader.GetString(1);
-                        postdto.Date = reader.GetDateTime(2);
-                        postdto.Upvotes = reader.GetInt32(3);
-                        postdtos.Add(postdto);
-                    }
-                }
-            }
-            return postdtos;
-        }
-
         public List<PostDTO> GetAllPostsByForumId(int forumid)
         {
             List<PostDTO> postdtos = new List<PostDTO>();
@@ -101,29 +77,6 @@ namespace Data_Acces_Layer.SQL
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@forumid", forumid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        int Id = reader.GetInt32(0);
-                        string PostTitel = reader.GetString(1);
-                        DateTime Date = reader.GetDateTime(2);
-                        PostDTO postdto = new PostDTO(Id, PostTitel, Date);
-                        postdtos.Add(postdto);
-                    }
-                }
-            }
-            return postdtos;
-        }
-
-        public List<PostDTO> GetAllPostsDesc()
-        {
-            List<PostDTO> postdtos = new List<PostDTO>();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.id ORDER BY post.posttitel DESC";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {

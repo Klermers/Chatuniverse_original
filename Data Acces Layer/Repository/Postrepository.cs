@@ -29,16 +29,6 @@ namespace Data_Acces_Layer.Repository
             return this.context.GetPostById(postid);
         }
 
-        public List<PostDTO> GetAllPosts()
-        {
-            return this.context.GetAllPosts();
-        }
-
-        public List<PostDTO> GetAllPostsDesc()
-        {
-            return this.context.GetAllPostsDesc();
-        }
-
         public List<PostDTO> GetAllPostsByForumId(int forumid)
         {
             return this.context.GetAllPostsByForumId(forumid);

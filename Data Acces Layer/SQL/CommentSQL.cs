@@ -17,7 +17,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "iNSERT INTO Comment(comment,Postid,userid,date) VALUES(@Comment,@Postid,@Userid,@Date)";
+                string query = "INSERT INTO Comment(comment,Postid,userid,date) VALUES(@Comment,@Postid,@Userid,@Date)";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Comment", comment);
@@ -33,7 +33,7 @@ namespace Data_Acces_Layer.SQL
         {
             using (conn = new MySqlConnection(connectionstring))
             {
-                string query = "DELETE FROM comment WHERE [id] = @id";
+                string query = "DELETE FROM comment WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -49,7 +49,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * from comment INNER JOIN post ON comment.id = @postid ORDER BY comment.Date";
+                string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id ORDER BY comment.Date";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@postid", postid);
@@ -73,7 +73,7 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "UPDATE comment SET [comment] = @Comment WHERE [id] = @id";
+                string query = "UPDATE comment SET comment = @Comment WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Comment", comment);

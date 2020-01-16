@@ -161,25 +161,32 @@ namespace Data_Acces_Layer.SQL
         public UserDTO GetUserByUsernamePassword(string username, string password)
         {
             UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM user WHERE user.Username = @Username AND user.Password = @Password";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Password", password);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM user WHERE user.Username = @Username AND user.Password = @Password";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);
-                    }
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@Password", password);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            userdto = new UserDTO(Id, Username, Password, CreationDate);
+                        }
 
+                    }
                 }
+            }
+            catch(ArgumentNullException)
+            {
+                userdto = null;
             }
             return userdto;
         }

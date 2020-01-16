@@ -43,22 +43,12 @@ namespace Data_Acces_Layer.InMemory
             postdata.RemoveAll(postdto => postdto.Id == id);
         }
 
-        public List<PostDTO> GetAllPosts()
-        {
-            return PostData;
-        }
-
         public List<PostDTO> GetAllPostsByForumId(int forumid)
         {
             return PostData;
         }
 
         public List<PostDTO> GetAllPostsByForumIdDesc(int forumid)
-        {
-            return PostData.OrderByDescending(post => post.PostTitel).ToList();
-        }
-
-        public List<PostDTO> GetAllPostsDesc()
         {
             return PostData.OrderByDescending(post => post.PostTitel).ToList();
         }
