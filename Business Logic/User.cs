@@ -100,18 +100,6 @@ namespace Business_Logic
             }
         }
 
-        public bool LoginUser()
-        {
-            if(userrepository.LoginUser(Username, Password) == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 
 }

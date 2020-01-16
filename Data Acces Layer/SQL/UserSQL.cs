@@ -28,64 +28,7 @@ namespace Data_Acces_Layer.SQL
             }
         }
 
-        public bool LoginUser(string username, string password)
-        {
-            UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM User WHERE Username = @Username AND Password = @Password";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Prepare();
-                    cmd.Parameters.AddWithValue("@Username", username);
-                    cmd.Parameters.AddWithValue("@Password", password);
-                    try
-                    {
-                        if ((int)cmd.ExecuteScalar() > 0)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    catch(NullReferenceException)
-                    {
-                        return false;
-                    }
-
-                }
-            } 
-        }
-
-        public List<UserDTO> GetAllUsers()
-        {
-            List<UserDTO> userdtos = new List<UserDTO>();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM user";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        UserDTO userdto = new UserDTO(Id,Username,Password,CreationDate);
-                        userdtos.Add(userdto);
-                    }
-
-                }
-            }
-            return userdtos;
-        }
-
-        public List<UserDTO> GetAllUsersById(int forumid)
+        public List<UserDTO> GetAllUsersByForumId(int forumid)
         {
             List<UserDTO> userdtos = new List<UserDTO>();
             using (conn = new MySqlConnection(connectionstring))
@@ -109,6 +52,30 @@ namespace Data_Acces_Layer.SQL
                 }
             }
             return userdtos;
+        }
+
+        public UserDTO GetUserByForumId(int forumid, int userid)
+        {
+            UserDTO userdto = new UserDTO();
+            using (conn = new MySqlConnection(connectionstring))
+            {
+                conn.Open();
+                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ForumId", forumid);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int Id = reader.GetInt32(0);
+                        string Username = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        DateTime CreationDate = reader.GetDateTime(3);
+                        userdto = new UserDTO(Id, Username, Password, CreationDate); ;
+                    }
+                }
+            }
+            return userdto;
         }
 
         public UserDTO GetUserByCommentId(int commentid)
@@ -161,31 +128,6 @@ namespace Data_Acces_Layer.SQL
             return userdto;
         }
 
-        public UserDTO GetUserByUserId(int id)
-        {
-            UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @userid";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@userid", id);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);
-                    }
-
-                }
-            }
-            return userdto;
-        }
-
         public void JoinForum(int userid, int forumid)
         {
             using (conn = new MySqlConnection(connectionstring))
@@ -216,16 +158,17 @@ namespace Data_Acces_Layer.SQL
             }
         }
 
-        public UserDTO GetUserByUsername(string username)
+        public UserDTO GetUserByUsernamePassword(string username, string password)
         {
             UserDTO userdto = new UserDTO();
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * FROM user WHERE user.Username = @Username";
+                string query = "SELECT * FROM user WHERE user.Username = @Username AND user.Password = @Password";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -241,16 +184,16 @@ namespace Data_Acces_Layer.SQL
             return userdto;
         }
 
-        public UserDTO GetUserByForumId(int forumid, int userid)
+        public UserDTO GetUserById(int id)
         {
             UserDTO userdto = new UserDTO();
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
+                string query = "SELECT * FROM user WHERE user.id = @userid";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@ForumId", forumid);
+                    cmd.Parameters.AddWithValue("@userid", id);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -258,8 +201,9 @@ namespace Data_Acces_Layer.SQL
                         string Username = reader.GetString(1);
                         string Password = reader.GetString(2);
                         DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);;
+                        userdto = new UserDTO(Id, Username, Password, CreationDate);
                     }
+
                 }
             }
             return userdto;

@@ -29,19 +29,14 @@ namespace Data_Acces_Layer.Repository
             this.context.JoinForum(userid, forumid);
         }
 
-        public List<UserDTO> GetAllUsersById(int id)
+        public List<UserDTO> GetAllUsersByForumId(int forumid)
         {
-            return this.context.GetAllUsersById(id);
+            return this.context.GetAllUsersByForumId(forumid);
         }
 
-        public List<UserDTO> GetAllUsers()
+        public UserDTO GetUserByForumId(int forumid, int userid)
         {
-            return this.context.GetAllUsers();
-        }
-
-        public UserDTO GetUserByUserId(int id)
-        {
-            return this.context.GetUserByUserId(id);
+            return this.context.GetUserByForumId(forumid, userid);
         }
 
         public UserDTO GetUserByPostId(int postid)
@@ -54,19 +49,14 @@ namespace Data_Acces_Layer.Repository
             return this.context.GetUserByCommentId(commentid);
         }
 
-        public bool LoginUser(string username, string password)
+        public UserDTO GetUserByUsernamePassword(string username, string password)
         {
-            return this.context.LoginUser(username, password);
+            return this.context.GetUserByUsernamePassword(username,password);
         }
 
-        public UserDTO GetUserByUsername(string username)
+        public UserDTO GetUserById(int id)
         {
-            return this.context.GetUserByUsername(username);
-        }
-
-        public UserDTO GetUserByForumId(int forumid, int userid)
-        {
-            return this.context.GetUserByForumId(forumid, userid);
+            return this.context.GetUserById(id);
         }
     }
 }

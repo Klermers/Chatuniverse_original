@@ -35,12 +35,7 @@ namespace Data_Acces_Layer.InMemory
             userdata.Add(forumdto);
         }
 
-        public List<UserDTO> GetAllUsers()
-        {
-            return UserData;
-        }
-
-        public List<UserDTO> GetAllUsersById(int id)
+        public List<UserDTO> GetAllUsersByForumId(int id)
         {
             return UserData;
         }
@@ -55,11 +50,6 @@ namespace Data_Acces_Layer.InMemory
             return new UserDTO(100, "customuser", "custompass", DateTime.Now);
         }
 
-        public UserDTO GetUserByUserId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void JoinForum(int userid, int forumid)
         {
             throw new NotImplementedException();
@@ -70,17 +60,17 @@ namespace Data_Acces_Layer.InMemory
             throw new NotImplementedException();
         }
 
-        public bool LoginUser(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserDTO GetUserByUsername(string username)
+        public UserDTO GetUserByUsernamePassword(string username, string password)
         {
             throw new NotImplementedException();
         }
 
         public UserDTO GetUserByForumId(int forumid, int userid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserById(int id)
         {
             throw new NotImplementedException();
         }

@@ -13,7 +13,5 @@ namespace ChatUniverseInterface
 
         void JoinForum(int userid, int forumid);
 
-        bool LoginUser(string username, string password);
-
     }
 }

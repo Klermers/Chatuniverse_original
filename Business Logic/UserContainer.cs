@@ -32,7 +32,7 @@ namespace Business_Logic
         {
             List<User> users = new List<User>();
             List<UserDTO> userdtos = new List<UserDTO>();
-            userdtos = userRepositoryContainer.GetAllUsersById(forumid);
+            userdtos = userRepositoryContainer.GetAllUsersByForumId(forumid);
             foreach (var userdto in userdtos)
             {
                 User user = new User(userdto);
@@ -60,7 +60,7 @@ namespace Business_Logic
         public User GetUserById(int id)
         {
             UserDTO userdto = new UserDTO();
-            userdto = userRepositoryContainer.GetUserByUserId(id);
+            userdto = userRepositoryContainer.GetUsersByForumId(id);
             User user = new User(userdto);
             return user;
         }
@@ -92,7 +92,7 @@ namespace Business_Logic
         public User GetUserByUserId(int id)
         {
             UserDTO userdto = new UserDTO();
-            userdto = userRepositoryContainer.GetUserByUserId(id);
+            userdto = userRepositoryContainer.GetUsersByForumId(id);
             User user = new User(userdto);
             return user;
         }

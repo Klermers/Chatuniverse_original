@@ -7,17 +7,15 @@ namespace ChatUniverseInterface
 {
     public interface IUserContainer
     {
-        List<UserDTO> GetAllUsersById(int id);
-
-        List<UserDTO> GetAllUsers();
-
-        UserDTO GetUserByUserId(int id);
+        List<UserDTO> GetAllUsersByForumId(int forumid);
 
         UserDTO GetUserByPostId(int postid);
 
         UserDTO GetUserByCommentId(int commentid);
 
-        UserDTO GetUserByUsername(string username);
+        UserDTO GetUserByUsernamePassword(string username, string password);
+
+        UserDTO GetUserById(int id);
 
         UserDTO GetUserByForumId(int forumid, int userid);
 
