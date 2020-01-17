@@ -36,12 +36,6 @@ namespace Data_Acces_Layer.InMemory
             forumdata.Add(forumdto);
         }
 
-        public void DeleteForum(int id)
-        {
-            forumdata.RemoveAll(forumdto => forumdto.Id == id);
-
-        }
-
         public List<ForumDTO> GetAllForums()
         {
             return forumdata;

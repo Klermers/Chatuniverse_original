@@ -69,19 +69,30 @@ namespace Business_Logic
             Users = users;
         }
 
-        public void CreateForum()
+        public string CreateForum()
         {
-            forumrepository.CreateForum(ForumTitel, Desciption);
+            if(ForumTitel.Length >= 10 && Desciption.Length > 20)
+            {
+                forumrepository.CreateForum(ForumTitel, Desciption);
+                return "forum is Created";
+            }
+            else
+            {
+                return "Titel is lower than ten or Description is lower than 20";
+            }
         }
 
-        public void UpdateForum_Description()
+        public string UpdateForum_Description()
         {
-            forumrepository.UpdateForum_Description(Id, Desciption);
-        }
-
-        public void DeleteForum()
-        {
-            forumrepository.DeleteForum(Id);
+            if(Desciption.Length > 20)
+            {
+                forumrepository.UpdateForum_Description(Id, Desciption);
+                return "Desciption got changed";
+            }
+            else
+            {
+                return "Desciption is too short";
+            }
         }
 
         public bool IsUserInForum(int id)

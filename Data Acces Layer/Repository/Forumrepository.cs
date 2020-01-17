@@ -20,11 +20,6 @@ namespace Data_Acces_Layer.Repository
             this.context.CreateForum(name, description);
         }
 
-        public void DeleteForum(int id)
-        {
-            this.context.DeleteForum(id);
-        }
-
         public void UpdateForum_Description(int id, string description)
         {
             this.context.UpdateForum_Description(id, description);

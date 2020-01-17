@@ -13,7 +13,6 @@ namespace Business_Logic
     {
         private ICommentRepository commentContainerRepository = new Commentrepository(new CommentSQL());
         private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
-        private string context;
 
         public List<Comment> Comments
         {

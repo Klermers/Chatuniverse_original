@@ -11,9 +11,5 @@ namespace Business_Logic.Tests
     [TestClass()]
     public class ForumTests
     {
-        [TestMethod()]
-        public void CreateForumTest()
-        {
-        }
     }
 }

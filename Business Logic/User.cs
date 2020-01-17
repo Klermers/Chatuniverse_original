@@ -12,7 +12,6 @@ namespace Business_Logic
     public class User
     {
         IUser userrepository = new Userrepository(new UserSQL());
-        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
 
         public int Id
         {
@@ -57,28 +56,26 @@ namespace Business_Logic
         public User(IUserRepository user)
         {
             userrepository = user;
-            userContainer = new UserContainer(user);
         }
 
-        public string CreateUser()
+        public string CreateUser(string username , string password)
         {
-            if (userContainer.GetUserByUsername(Username).Username == Username || Password.Length < 12)
+            if (Username != null || password.Length < 12)
             {
                 return "This username is already taken or your password is shorter than 15 letters.";
             }
             else
             {
-                userrepository.CreateUser(Username, Password);
+                userrepository.CreateUser(username, password);
                 return "You made a account with chatuniverse.";
             }
         }
 
-        public string LeaveForumm(int forumid)
+        public string LeaveForum(int forumid)
         {
-            User user = userContainer.GetUserByUsername(Username);
-            if(user == null)
+            if(Username == null)
             {
-                return "You aren't a user so you can''tjoin a forum";
+                return "You aren't a user so you can'tjoin a forum";
             }
             else
             {
@@ -87,16 +84,16 @@ namespace Business_Logic
             }
         }
 
-        public string JoinForum(int forumid)
-        {
-            if(userContainer.GetUserByForumId(forumid,Id).Id == Id)
+        public string JoinForum(int forumid, int userid)
+        {  
+            if(Username != null)
             {
                 return "User has already join the forum";
             }
             else
             {
-                userrepository.JoinForum(Id, forumid);
-                return "User Has join this forum";
+                userrepository.JoinForum(userid, forumid);
+                return "User Has joined this forum";
             }
         }
 

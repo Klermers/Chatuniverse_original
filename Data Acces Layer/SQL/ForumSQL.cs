@@ -26,21 +26,6 @@ namespace Data_Acces_Layer.SQL
             }
         }
 
-        public void DeleteForum(int id)
-        {
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "DELETE FROM forum WHERE [id] = @id";
-
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
         //This forum gets single forum information
         public ForumDTO GetForumById(int id)
         {

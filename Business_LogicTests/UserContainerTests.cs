@@ -9,10 +9,5 @@ namespace Business_Logic.Tests
     [TestClass()]
     public class UserContainerTests
     {
-        [TestMethod()]
-        public void GetAllUsersByIdTest()
-        {
-            Assert.Fail();
-        }
     }
 }

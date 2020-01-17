@@ -64,9 +64,17 @@ namespace Business_Logic
             postrepository = post;
         }
 
-        public void CreatePost(int forumid, int userid)
+        public string CreatePost(int forumid, int userid)
         {
-            postrepository.CreatePost(forumid, Posttitel, userid);
+            if(Posttitel.Length >= 15)
+            {
+                postrepository.CreatePost(forumid, Posttitel, userid);
+                return "Post is Created";
+            }
+            else
+            {
+                return "Titel needs a minimum of 15";
+            }
         }
         public void DeletePost()
         {

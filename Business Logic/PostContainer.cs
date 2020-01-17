@@ -40,7 +40,7 @@ namespace Business_Logic
             foreach (var postdto in postdtos)
             {
                 commentContainer.GetAllCommentsByPostId(postdto.Id);
-                Post post = new Post(postdto, userContainer.GetUserById(forumid), commentContainer.Comments);
+                Post post = new Post(postdto, userContainer.GetUserByPostId(postdto.Id), commentContainer.Comments);
                 posts.Add(post);
             }
             Posts = posts;
@@ -52,34 +52,6 @@ namespace Business_Logic
             List<PostDTO> postdtos = new List<PostDTO>();
             List<Post> posts = new List<Post>();
             postdtos = postrepository.GetAllPostsByForumIdDesc(forumid);
-            foreach (var postdto in postdtos)
-            {
-                commentContainer.GetAllCommentsByPostId(postdto.Id);
-                Post post = new Post(postdto, userContainer.GetUserById(forumid), commentContainer.Comments);
-                posts.Add(post);
-            }
-            Posts = posts;
-        }
-
-        public void GetAllPosts()
-        {
-            List<PostDTO> postdtos = new List<PostDTO>();
-            List<Post> posts = new List<Post>();
-            postdtos = postrepository.GetAllPosts();
-            foreach (var postdto in postdtos)
-            {
-                commentContainer.GetAllCommentsByPostId(postdto.Id);
-                Post post = new Post(postdto, userContainer.GetUserByPostId(postdto.Id), commentContainer.Comments);
-                posts.Add(post);
-            }
-            Posts = posts;
-        }
-
-        public void GetAllPostsDesc()
-        {
-            List<PostDTO> postdtos = new List<PostDTO>();
-            List<Post> posts = new List<Post>();
-            postdtos = postrepository.GetAllPosts();
             foreach (var postdto in postdtos)
             {
                 commentContainer.GetAllCommentsByPostId(postdto.Id);

@@ -57,23 +57,31 @@ namespace Data_Acces_Layer.SQL
         public UserDTO GetUserByForumId(int forumid, int userid)
         {
             UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@ForumId", forumid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate); ;
+                        cmd.Parameters.AddWithValue("@ForumId", forumid);
+                        cmd.Parameters.AddWithValue("@Userid", userid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            userdto = new UserDTO(Id, Username, Password, CreationDate); ;
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                userdto = null;
             }
             return userdto;
         }
@@ -84,10 +92,10 @@ namespace Data_Acces_Layer.SQL
             using (conn = new MySqlConnection(connectionstring))
             {
                 conn.Open();
-                string query = "SELECT * FROM user INNER JOIN comment ON user.Id = @commentid";
+                string query = "SELECT * FROM user INNER JOIN comment ON user.Id = comment.userid WHERE comment.id = @Commentid ";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@postid", commentid);
+                    cmd.Parameters.AddWithValue("@Commentid", commentid);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -145,16 +153,23 @@ namespace Data_Acces_Layer.SQL
 
         public void LeaveForum(int forumid, int userid)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "DELETE INTO forum_user WHERE ForumId = @ForumId AND UserId = @UserId";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@ForumId", forumid);
-                    cmd.Parameters.AddWithValue("@UserId", userid);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+                    string query = "DELETE FROM forum_user WHERE ForumId = @ForumId AND UserId = @UserId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ForumId", forumid);
+                        cmd.Parameters.AddWithValue("@UserId", userid);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+
             }
         }
 
@@ -184,7 +199,7 @@ namespace Data_Acces_Layer.SQL
                     }
                 }
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 userdto = null;
             }

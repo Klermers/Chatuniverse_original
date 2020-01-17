@@ -42,29 +42,6 @@ namespace Business_Logic
             Users = users;
         }
 
-        public void GetAllUsers()
-        {
-            List<User> users = new List<User>();
-            List<UserDTO> userdtos = new List<UserDTO>();
-            userdtos = userRepositoryContainer.GetAllUsers();
-            foreach (var userdto in userdtos)
-            {
-                User user = new User(userdto);
-                users.Add(user);
-
-            }
-
-            Users = users;
-        }
-
-        public User GetUserById(int id)
-        {
-            UserDTO userdto = new UserDTO();
-            userdto = userRepositoryContainer.GetUsersByForumId(id);
-            User user = new User(userdto);
-            return user;
-        }
-
         public User GetUserByPostId(int postid)
         {
             UserDTO userdto = new UserDTO();
@@ -81,22 +58,22 @@ namespace Business_Logic
             return user;
         }
 
-        public User GetUserByUsername(string username)
+        public User GetUserByUsernamePassword(string username,string password)
         {
             UserDTO userdto = new UserDTO();
-            userdto = userRepositoryContainer.GetUserByUsername(username);
+            userdto = userRepositoryContainer.GetUserByUsernamePassword(username,password);
             User user = new User(userdto);
             return user;
         }
 
-        public User GetUserByUserId(int id)
+        public User GetUserById(int id)
         {
             UserDTO userdto = new UserDTO();
-            userdto = userRepositoryContainer.GetUsersByForumId(id);
+            userdto = userRepositoryContainer.GetUserById(id);
             User user = new User(userdto);
             return user;
         }
-        
+
         public User GetUserByForumId(int forumid, int userid)
         {
             UserDTO userdto = new UserDTO();
