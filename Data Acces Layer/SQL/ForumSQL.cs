@@ -30,22 +30,29 @@ namespace Data_Acces_Layer.SQL
         public ForumDTO GetForumById(int id)
         {
             ForumDTO forumdto = new ForumDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * from forum WHERE id = @id";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    var reader = cmd.ExecuteReader(); 
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * from forum WHERE id = @id";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Name = reader.GetString(1);
-                        string Description = reader.GetString(4);
-                        forumdto = new ForumDTO(Id,Name,Description);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Name = reader.GetString(1);
+                            string Description = reader.GetString(4);
+                            forumdto = new ForumDTO(Id, Name, Description);
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                forumdto = null;
             }
             return forumdto;
         }
@@ -69,23 +76,30 @@ namespace Data_Acces_Layer.SQL
         public List<ForumDTO> GetAllForums()
         {
             List<ForumDTO> forumdtos = new List<ForumDTO>();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    conn.Open();
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Name = reader.GetString(1);
-                        string Description = reader.GetString(4);
-                        ForumDTO forumdto = new ForumDTO(Id,Name,Description);
-                        forumdtos.Add(forumdto);
-                    }
+                        conn.Open();
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Name = reader.GetString(1);
+                            string Description = reader.GetString(4);
+                            ForumDTO forumdto = new ForumDTO(Id, Name, Description);
+                            forumdtos.Add(forumdto);
+                        }
 
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                forumdtos = null;
             }
             return forumdtos;
         }
@@ -93,23 +107,30 @@ namespace Data_Acces_Layer.SQL
         public List<ForumDTO> GetAllForumsDesc()
         {
             List<ForumDTO> forumdtos = new List<ForumDTO>();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name DESC";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    conn.Open();
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name DESC";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Name = reader.GetString(1);
-                        string Description = reader.GetString(4);
-                        ForumDTO forumdto = new ForumDTO(Id,Name,Description);
-                        forumdtos.Add(forumdto);
-                    }
+                        conn.Open();
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Name = reader.GetString(1);
+                            string Description = reader.GetString(4);
+                            ForumDTO forumdto = new ForumDTO(Id, Name, Description);
+                            forumdtos.Add(forumdto);
+                        }
 
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                forumdtos = null;
             }
             return forumdtos;
         }

@@ -30,26 +30,34 @@ namespace Data_Acces_Layer.SQL
 
         public List<UserDTO> GetAllUsersByForumId(int forumid)
         {
-            List<UserDTO> userdtos = new List<UserDTO>();
-            using (conn = new MySqlConnection(connectionstring))
-            {
-                conn.Open();
-                string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.Forumid = @ForumId";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ForumId", forumid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        UserDTO userdto = new UserDTO(Id, Username, Password, CreationDate);
-                        userdtos.Add(userdto);
-                    }
 
+            List<UserDTO> userdtos = new List<UserDTO>();
+            try
+            {
+                using (conn = new MySqlConnection(connectionstring))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.Forumid = @ForumId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ForumId", forumid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            UserDTO userdto = new UserDTO(Id, Username, Password, CreationDate);
+                            userdtos.Add(userdto);
+                        }
+
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                userdtos = null;
             }
             return userdtos;
         }
@@ -89,24 +97,31 @@ namespace Data_Acces_Layer.SQL
         public UserDTO GetUserByCommentId(int commentid)
         {
             UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM user INNER JOIN comment ON user.Id = comment.userid WHERE comment.id = @Commentid ";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@Commentid", commentid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM user INNER JOIN comment ON user.Id = comment.userid WHERE comment.id = @Commentid ";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);
-                    }
+                        cmd.Parameters.AddWithValue("@Commentid", commentid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            userdto = new UserDTO(Id, Username, Password, CreationDate);
+                        }
 
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                userdto = null;
             }
             return userdto;
         }
@@ -114,24 +129,31 @@ namespace Data_Acces_Layer.SQL
         public UserDTO GetUserByPostId(int postid)
         {
             UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM user INNER JOIN post ON user.Id = @postid";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@postid", postid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM user INNER JOIN post ON user.Id = @postid";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);
-                    }
+                        cmd.Parameters.AddWithValue("@postid", postid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            userdto = new UserDTO(Id, Username, Password, CreationDate);
+                        }
 
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                userdto = null;
             }
             return userdto;
         }
@@ -209,24 +231,31 @@ namespace Data_Acces_Layer.SQL
         public UserDTO GetUserById(int id)
         {
             UserDTO userdto = new UserDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM user WHERE user.id = @userid";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@userid", id);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM user WHERE user.id = @userid";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Username = reader.GetString(1);
-                        string Password = reader.GetString(2);
-                        DateTime CreationDate = reader.GetDateTime(3);
-                        userdto = new UserDTO(Id, Username, Password, CreationDate);
-                    }
+                        cmd.Parameters.AddWithValue("@userid", id);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Username = reader.GetString(1);
+                            string Password = reader.GetString(2);
+                            DateTime CreationDate = reader.GetDateTime(3);
+                            userdto = new UserDTO(Id, Username, Password, CreationDate);
+                        }
 
+                    }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                userdto = null;
             }
             return userdto;
         }

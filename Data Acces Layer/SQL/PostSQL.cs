@@ -46,23 +46,30 @@ namespace Data_Acces_Layer.SQL
         public List<PostDTO> GetAllPostsByForumId(int forumid)
         {
             List<PostDTO> postdtos = new List<PostDTO>();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.Id WHERE post.forum =@forumid  ORDER BY post.posttitel";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@forumid", forumid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.Id WHERE post.forum =@forumid  ORDER BY post.posttitel";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string PostTitel = reader.GetString(1);
-                        DateTime Date = reader.GetDateTime(2);
-                        PostDTO postdto = new PostDTO(Id,PostTitel,Date);
-                        postdtos.Add(postdto);
+                        cmd.Parameters.AddWithValue("@forumid", forumid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string PostTitel = reader.GetString(1);
+                            DateTime Date = reader.GetDateTime(2);
+                            PostDTO postdto = new PostDTO(Id, PostTitel, Date);
+                            postdtos.Add(postdto);
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                postdtos = null;
             }
             return postdtos;
         }
@@ -70,23 +77,30 @@ namespace Data_Acces_Layer.SQL
         public List<PostDTO> GetAllPostsByForumIdDesc(int forumid)
         {
             List<PostDTO> postdtos = new List<PostDTO>();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = @forumid ORDER BY post.posttitel DESC";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@forumid", forumid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = @forumid ORDER BY post.posttitel DESC";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string PostTitel = reader.GetString(1);
-                        DateTime Date = reader.GetDateTime(2);
-                        PostDTO postdto = new PostDTO(Id, PostTitel, Date);
-                        postdtos.Add(postdto);
+                        cmd.Parameters.AddWithValue("@forumid", forumid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string PostTitel = reader.GetString(1);
+                            DateTime Date = reader.GetDateTime(2);
+                            PostDTO postdto = new PostDTO(Id, PostTitel, Date);
+                            postdtos.Add(postdto);
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                postdtos = null;
             }
             return postdtos;
         }
@@ -94,22 +108,29 @@ namespace Data_Acces_Layer.SQL
         public PostDTO GetPostById(int postid)
         {
             PostDTO postdto = new PostDTO();
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * from post WHERE id = @id";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@id", postid);
-                    var reader = cmd.ExecuteReader(); ;
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * from post WHERE id = @id";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string PostTitel = reader.GetString(1);
-                        DateTime Date = reader.GetDateTime(2);
-                        postdto = new PostDTO(Id,PostTitel,Date);
+                        cmd.Parameters.AddWithValue("@id", postid);
+                        var reader = cmd.ExecuteReader(); ;
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string PostTitel = reader.GetString(1);
+                            DateTime Date = reader.GetDateTime(2);
+                            postdto = new PostDTO(Id, PostTitel, Date);
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                postdto = null;
             }
             return postdto;
         }

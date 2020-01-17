@@ -45,25 +45,31 @@ namespace Data_Acces_Layer.SQL
         public List<CommentDTO> GetAllCommentsByPostId(int postid)
         {
             List<CommentDTO> commentdtos = new List<CommentDTO>();
-
-            using (conn = new MySqlConnection(connectionstring))
+            try
             {
-                conn.Open();
-                string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id ORDER BY comment.Date";
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (conn = new MySqlConnection(connectionstring))
                 {
-                    cmd.Parameters.AddWithValue("@postid", postid);
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id ORDER BY comment.Date";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        int Id = reader.GetInt32(0);
-                        string Text = reader.GetString(1);
-                        DateTime Date = reader.GetDateTime(2);
-                        CommentDTO commentdto = new CommentDTO(Id,Text,Date);
+                        cmd.Parameters.AddWithValue("@postid", postid);
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string Text = reader.GetString(1);
+                            DateTime Date = reader.GetDateTime(2);
+                            CommentDTO commentdto = new CommentDTO(Id, Text, Date);
 
-                        commentdtos.Add(commentdto);
+                            commentdtos.Add(commentdto);
+                        }
                     }
                 }
+            }
+            catch(NullReferenceException)
+            {
+                commentdtos = null;
             }
             return commentdtos;
         }
