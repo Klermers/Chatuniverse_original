@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class User
     {
-        IUser userrepository = new Userrepository(new UserSQL());
+        IUser userrepository;
 
         public int Id
         {
@@ -42,9 +42,9 @@ namespace Business_Logic
             Date = userdto.CreationDate;
         }
 
-        public User(IUserRepository user)
+        public User(IConnectionString conn)
         {
-            userrepository = user;
+            userrepository = new Userrepository(new UserSQL(conn));
         }
 
         public string CreateUser(string username , string password)

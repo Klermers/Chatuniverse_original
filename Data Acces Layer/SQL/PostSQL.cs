@@ -10,11 +10,16 @@ namespace Data_Acces_Layer.SQL
     public class PostSQL : IPostContext
     {
         MySqlConnection conn;
-        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";
+        IConnectionString Connectionstring;
+
+        public PostSQL(IConnectionString connmectionstring)
+        {
+            Connectionstring = connmectionstring;
+        }
 
         public void CreatePost(int forumid, string titel, int userid)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "iNSERT INTO Post(posttitel,forum,userid,Date) VALUES(@Titel,@Forum,@Userid,@Date)";
@@ -31,7 +36,7 @@ namespace Data_Acces_Layer.SQL
 
         public void DeletePost(int id)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "DELETE FROM post WHERE [id] = @id";
@@ -48,7 +53,7 @@ namespace Data_Acces_Layer.SQL
             List<PostDTO> postdtos = new List<PostDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = forum.Id WHERE post.forum =@forumid  ORDER BY post.posttitel";
@@ -79,7 +84,7 @@ namespace Data_Acces_Layer.SQL
             List<PostDTO> postdtos = new List<PostDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM `post` INNER JOIN forum ON post.forum = @forumid ORDER BY post.posttitel DESC";
@@ -110,7 +115,7 @@ namespace Data_Acces_Layer.SQL
             PostDTO postdto = new PostDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * from post WHERE id = @id";

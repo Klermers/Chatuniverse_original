@@ -10,11 +10,16 @@ namespace Data_Acces_Layer.SQL
     public class UserSQL : IUserContext
     {
         MySqlConnection conn;
-        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";
+        IConnectionString Connectionstring;
+
+        public UserSQL(IConnectionString connmectionstring)
+        {
+            Connectionstring = connmectionstring;
+        }
 
         public void CreateUser(string username, string password)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "INSERT INTO User(Username,Password,Date) VALUES(@Username,@Password,@Date)";
@@ -34,7 +39,7 @@ namespace Data_Acces_Layer.SQL
             List<UserDTO> userdtos = new List<UserDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.Forumid = @ForumId";
@@ -67,7 +72,7 @@ namespace Data_Acces_Layer.SQL
             UserDTO userdto = new UserDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.ForumId = @ForumId AND forum_user.UserId = @Userid";
@@ -99,7 +104,7 @@ namespace Data_Acces_Layer.SQL
             UserDTO userdto = new UserDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user INNER JOIN comment ON user.Id = comment.userid WHERE comment.id = @Commentid ";
@@ -131,7 +136,7 @@ namespace Data_Acces_Layer.SQL
             UserDTO userdto = new UserDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user INNER JOIN post ON user.Id = post.userid WHERE post.id = @postid";
@@ -160,7 +165,7 @@ namespace Data_Acces_Layer.SQL
 
         public void JoinForum(int userid, int forumid)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "INSERT INTO forum_user(ForumId,UserId) VALUES(@ForumId,@UserId)";
@@ -177,7 +182,7 @@ namespace Data_Acces_Layer.SQL
         {
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "DELETE FROM forum_user WHERE ForumId = @ForumId AND UserId = @UserId";
@@ -200,7 +205,7 @@ namespace Data_Acces_Layer.SQL
             UserDTO userdto = new UserDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user WHERE user.Username = @Username AND user.Password = @Password";
@@ -233,7 +238,7 @@ namespace Data_Acces_Layer.SQL
             UserDTO userdto = new UserDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * FROM user WHERE user.id = @userid";

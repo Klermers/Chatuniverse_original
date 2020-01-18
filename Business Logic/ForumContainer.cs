@@ -11,25 +11,20 @@ namespace Business_Logic
 {
     public class ForumContainer
     {
-        private IForumContainer forumrepository = new Forumrepository(new ForumSQL());
-        private PostContainer postContainer = new PostContainer(new Postrepository(new PostSQL()),new Commentrepository(new CommentSQL()),new Userrepository(new UserSQL()));
-        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
+        private IForumContainer forumrepository;
+        private PostContainer postContainer;
+        private UserContainer userContainer;
         public List<Forum> Forums
         {
             get;
             private set;
         }
 
-        public ForumContainer()
+        public ForumContainer(IConnectionString conn)
         {
-
-        }
-
-        public ForumContainer(IForumRepository forum, IPostRepository post, IUserRepository user, ICommentRepository comment)
-        {
-            forumrepository = forum;
-            postContainer = new PostContainer(post,comment,user);
-            userContainer = new UserContainer(user);
+            forumrepository = new Forumrepository(new ForumSQL(conn));
+            postContainer = new PostContainer(conn);
+            userContainer = new UserContainer(conn);
         }
 
         public void GetAllForums()

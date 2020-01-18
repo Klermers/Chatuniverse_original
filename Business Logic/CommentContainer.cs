@@ -11,8 +11,8 @@ namespace Business_Logic
 {
     public class CommentContainer
     {
-        private ICommentRepository commentContainerRepository = new Commentrepository(new CommentSQL());
-        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
+        private ICommentRepository commentContainerRepository;
+        private UserContainer userContainer;
 
         public List<Comment> Comments
         {
@@ -20,15 +20,10 @@ namespace Business_Logic
             private set;
         }
 
-        public CommentContainer()
+        public CommentContainer(IConnectionString conn)
         {
-
-        }
-
-        public CommentContainer(ICommentRepository comment, IUserRepository user)
-        {
-            commentContainerRepository = comment;
-            userContainer = new UserContainer(user);
+            commentContainerRepository = new Commentrepository(new CommentSQL(conn)); ;
+            userContainer = new UserContainer(conn);
         }
 
         public void GetAllCommentsByPostId(int postid)

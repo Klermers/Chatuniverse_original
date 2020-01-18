@@ -6,14 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Chatuniverse.Models;
 using Business_Logic;
 using DTO;
+using ChatUniverseInterface;
 
 namespace Chatuniverse.Controllers
 {
     public class CommentController : Controller
     {
+        private readonly IConnectionString connectionstring;
+
+        public CommentController(IConnectionString connectionString)
+        {
+            this.connectionstring = connectionString;
+        }
+
         public ActionResult GetComments(int id, int forumid)
         {
-            ForumContainer forumContainer = new ForumContainer();
+            ForumContainer forumContainer = new ForumContainer(connectionstring);
             PostContainer postContainer = new PostContainer();
             ForumPostViewModel forumPostViewModel = new ForumPostViewModel(forumContainer.GetForumById(forumid), postContainer.GetPostById(id));
 
@@ -22,7 +30,7 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreateComment(CommentViewModel Commentmodel, int postid, int userid)
         {
-            Comment comment = new Comment();
+            Comment comment = new Comment(connectionstring);
 
             comment.CreateComment(postid, userid, Commentmodel.Text);
             return View();

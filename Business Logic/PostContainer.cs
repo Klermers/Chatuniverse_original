@@ -10,9 +10,9 @@ namespace Business_Logic
 {
     public class PostContainer
     {
-        private UserContainer userContainer = new UserContainer(new Userrepository(new UserSQL()));
-        private IPostContainer postrepository = new Postrepository(new PostSQL());
-        private CommentContainer commentContainer = new CommentContainer(new Commentrepository(new CommentSQL()),new Userrepository(new UserSQL()));
+        private UserContainer userContainer;
+        private IPostContainer postrepository;
+        private CommentContainer commentContainer;
 
         public List<Post> Posts
         {
@@ -25,11 +25,11 @@ namespace Business_Logic
 
         }
 
-        public PostContainer(IPostContainer post, ICommentRepository comment, IUserRepository user)
+        public PostContainer(IConnectionString conn)
         {
-            postrepository = post;
-            commentContainer = new CommentContainer(comment, user);
-            userContainer = new UserContainer(user);
+            postrepository = new Postrepository(new PostSQL(conn));
+            commentContainer = new CommentContainer(conn);
+            userContainer = new UserContainer(conn);
         }
 
         public void GetAllPostsByForumId(int forumid)

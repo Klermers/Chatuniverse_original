@@ -12,7 +12,6 @@ namespace Chatuniverse.Controllers
 {
     public class ForumController : Controller
     {
-        private readonly string constring;
         private readonly IConnectionString connectionstring;
 
         public ForumController(IConnectionString connectionString)
@@ -23,7 +22,7 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreateForum(ForumViewModel Onpost)
         {
-            Forum forum = new Forum(new repos);
+            Forum forum = new Forum(connectionstring);
             string result = forum.CreateForum(Onpost.ForumTitel,Onpost.Desciption);
             ViewBag.Created = result;
             return View();
@@ -36,7 +35,7 @@ namespace Chatuniverse.Controllers
 
         public IActionResult GetAllForums()
         {
-            ForumContainer forumContainer = new ForumContainer();
+            ForumContainer forumContainer = new ForumContainer(connectionstring);
             List<ForumViewModel> forumviewmodels = new List<ForumViewModel>();
             forumContainer.GetAllForums();
             foreach (var forum in forumContainer.Forums)

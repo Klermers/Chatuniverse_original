@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class Post
     {
-        IPost postrepository = new Postrepository(new PostSQL());
+        IPost postrepository;
 
         public int Id
         {
@@ -53,12 +53,12 @@ namespace Business_Logic
             User = user;
         }
 
-        public Post(IPostRepository post)
+        public Post(IConnectionString conn)
         {
-            postrepository = post;
+            postrepository = new Postrepository(new PostSQL(conn));
         }
 
-        public string CreatePost(int forumid, int userid`, string posttitel)
+        public string CreatePost(int forumid, int userid, string posttitel)
         {
             if(posttitel.Length >= 10)
             {

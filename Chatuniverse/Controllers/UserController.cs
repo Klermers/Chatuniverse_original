@@ -6,15 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using Chatuniverse.Models;
 using Business_Logic;
 using Microsoft.AspNetCore.Http;
+using ChatUniverseInterface;
 
 namespace Chatuniverse.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IConnectionString connectionstring;
+
+        public UserController(IConnectionString connectionString)
+        {
+            this.connectionstring = connectionString;
+        }
+
         [HttpPost]
         public IActionResult CreateUser(UserViewModel Onpost)
         {
-            User user = new User();
+            User user = new User(connectionstring);
             user.CreateUser(Onpost.Username, Onpost.Password);
             return View();
         }
@@ -27,7 +35,7 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult Login(UserViewModel onpost)
         {
-            UserContainer usercontainer = new UserContainer();
+            UserContainer usercontainer = new UserContainer(connectionstring);
             User user = usercontainer.GetUserByUsernamePassword(onpost.Username, onpost.Password);
             if(user.Username != null)
             {
@@ -55,13 +63,13 @@ namespace Chatuniverse.Controllers
 
         public IActionResult JoinForum(int id)
         {
-            ForumContainer forumcontainer = new ForumContainer();
-            UserContainer usercontainer = new UserContainer();
+            ForumContainer forumcontainer = new ForumContainer(connectionstring);
+            UserContainer usercontainer = new UserContainer(connectionstring);
             Forum forum = forumcontainer.GetForumById(id);
             if (HttpContext.Session.GetInt32("Id") != null)
             {
                 int userid = (int)HttpContext.Session.GetInt32("Id");
-                User user = new User();
+                User user = new User(connectionstring);
                 if(usercontainer.GetUserById(userid).Username != null )
                 {
                     user.JoinForum(id,userid);

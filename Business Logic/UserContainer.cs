@@ -11,21 +11,16 @@ namespace Business_Logic
 {
     public class UserContainer
     {
-        private     IUserContainer userRepositoryContainer = new Userrepository(new UserSQL());
+        private IUserContainer userRepositoryContainer;
         public List<User> Users
         {
             get;
             private set;
         }
 
-        public UserContainer(IUserRepository user)
+        public UserContainer(IConnectionString conn)
         {
-            userRepositoryContainer = user;
-        }
-
-        public UserContainer()
-        {
-
+            userRepositoryContainer = new Userrepository(new UserSQL(conn));
         }
 
         public void GetAllUsersByForumId(int forumid)

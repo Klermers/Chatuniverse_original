@@ -11,7 +11,7 @@ namespace Business_Logic
 {
     public class Comment
     {
-        private ICommentRepository commentrepository = new Commentrepository(new CommentSQL());
+        private ICommentRepository commentrepository;
 
         public int Id
         {
@@ -42,9 +42,9 @@ namespace Business_Logic
             User = user;
         }
 
-        public Comment(ICommentRepository comment)
+        public Comment(IConnectionString conn)
         {
-            commentrepository = comment;
+            commentrepository = new Commentrepository(new CommentSQL(conn));
         }
 
         public string CreateComment(int postid, int userid, string text)

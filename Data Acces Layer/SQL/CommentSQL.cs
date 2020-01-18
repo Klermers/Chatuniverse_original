@@ -10,11 +10,16 @@ namespace Data_Acces_Layer.SQL
     public class CommentSQL : ICommentContext
     {
         MySqlConnection conn;
-        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";
+        IConnectionString Connectionstring;
+
+        public CommentSQL(IConnectionString connmectionstring)
+        {
+            Connectionstring = connmectionstring;
+        }
 
         public void CreateComment(string comment, int postid, int userid)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "INSERT INTO Comment(comment,Postid,userid,date) VALUES(@Comment,@Postid,@Userid,@Date)";
@@ -31,7 +36,7 @@ namespace Data_Acces_Layer.SQL
 
         public void DeleteComment(int id)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 string query = "DELETE FROM comment WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -47,7 +52,7 @@ namespace Data_Acces_Layer.SQL
             List<CommentDTO> commentdtos = new List<CommentDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id WHERE comment.Postid =@postid ORDER BY comment.Date";
@@ -76,7 +81,7 @@ namespace Data_Acces_Layer.SQL
 
         public void UpdateComment_Comment(int commentid, string comment)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "UPDATE comment SET comment = @Comment WHERE id = @id";
