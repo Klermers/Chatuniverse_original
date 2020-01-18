@@ -28,7 +28,7 @@ namespace Business_Logic
 
         }
 
-        public void GetAllUsersById(int forumid)
+        public void GetAllUsersByForumId(int forumid)
         {
             List<User> users = new List<User>();
             List<UserDTO> userdtos = new List<UserDTO>();

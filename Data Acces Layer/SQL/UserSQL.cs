@@ -70,7 +70,7 @@ namespace Data_Acces_Layer.SQL
                 using (conn = new MySqlConnection(connectionstring))
                 {
                     conn.Open();
-                    string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = @Userid WHERE forum_user.ForumId = @ForumId";
+                    string query = "SELECT * FROM user INNER JOIN forum_user ON user.Id = forum_user.UserId WHERE forum_user.ForumId = @ForumId AND forum_user.UserId = @Userid";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@ForumId", forumid);
@@ -134,7 +134,7 @@ namespace Data_Acces_Layer.SQL
                 using (conn = new MySqlConnection(connectionstring))
                 {
                     conn.Open();
-                    string query = "SELECT * FROM user INNER JOIN post ON user.Id = @postid";
+                    string query = "SELECT * FROM user INNER JOIN post ON user.Id = post.userid WHERE post.id = @postid";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@postid", postid);

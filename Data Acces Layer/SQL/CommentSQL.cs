@@ -50,7 +50,7 @@ namespace Data_Acces_Layer.SQL
                 using (conn = new MySqlConnection(connectionstring))
                 {
                     conn.Open();
-                    string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id ORDER BY comment.Date";
+                    string query = "SELECT * from comment INNER JOIN post ON comment.Postid = post.id WHERE comment.Postid =@postid ORDER BY comment.Date";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@postid", postid);

@@ -78,7 +78,7 @@ namespace Business_Logic
             }
             else
             {
-                return "Titel is lower than ten or Description is lower than 20";
+                return "Titel is lower than 10 or Description is lower than 20";
             }
         }
 
@@ -93,21 +93,6 @@ namespace Business_Logic
             {
                 return "Desciption is too short";
             }
-        }
-
-        public bool IsUserInForum(int id)
-        {
-            if(Users != null)
-            {
-                foreach (var user in Users)
-                {
-                    if (user.Id == id)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 }

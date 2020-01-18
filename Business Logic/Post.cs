@@ -53,10 +53,9 @@ namespace Business_Logic
             User = user;
         }
 
-        public Post(string posttitel, DateTime date)
+        public Post(string posttitel)
         {
             Posttitel = posttitel;
-            Date = date;
         }
 
         public Post(IPostRepository post)
@@ -66,14 +65,14 @@ namespace Business_Logic
 
         public string CreatePost(int forumid, int userid)
         {
-            if(Posttitel.Length >= 15)
+            if(Posttitel.Length >= 10)
             {
                 postrepository.CreatePost(forumid, Posttitel, userid);
                 return "Post is Created";
             }
             else
             {
-                return "Titel needs a minimum of 15";
+                return "Titel needs a minimum of 10";
             }
         }
         public void DeletePost()

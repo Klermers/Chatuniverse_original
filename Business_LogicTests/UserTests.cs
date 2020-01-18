@@ -64,7 +64,7 @@ namespace Business_Logic.Tests
         {
             //Arrange
             UserContainer usercontainer = new UserContainer();
-            User user = usercontainer.GetUserByForumId(5,3);
+            User user = usercontainer.GetUserByForumId(5,4);
             string expected = "You aren't a user so you can'tjoin a forum";
             //Act
             string result = user.LeaveForum(1);
@@ -102,7 +102,7 @@ namespace Business_Logic.Tests
         {
             //Arrange
             UserContainer usercontainer = new UserContainer();
-            User user = usercontainer.GetUserByForumId(5, 3);
+            User user = usercontainer.GetUserByForumId(5, 4);
             string expected = "User Has joined this forum"; 
             //Act
             string result = user.JoinForum(5,4);

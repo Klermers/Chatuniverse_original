@@ -47,6 +47,12 @@ namespace Business_Logic
             Text = text;
         }
 
+        public Comment(int id,string text)
+        {
+            Id = id;
+            Text = text;
+        }
+
         public Comment(ICommentRepository comment)
         {
             commentrepository = comment;
@@ -60,12 +66,12 @@ namespace Business_Logic
             }
             else
             {
-                commentrepository.CreateComment(Text, postid, User.Id);
+                commentrepository.CreateComment(Text, postid, userid);
                 return "Comment is created ";
             }
         }
 
-        public string UpdateComment_Comment()
+        public string UpdateComment_Text()
         {
             if (Text.Length < 20)
             {

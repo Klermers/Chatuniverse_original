@@ -63,7 +63,7 @@ namespace Business_Logic
             ForumDTO forumdto = new ForumDTO();
             forumdto = forumrepository.GetForumById(id);
             postContainer.GetAllPostsByForumId(forumdto.Id);
-            userContainer.GetAllUsersById(forumdto.Id);
+            userContainer.GetAllUsersByForumId(forumdto.Id);
             Forum forum = new Forum(forumdto, postContainer.Posts, userContainer.Users);
             return forum;
         }
