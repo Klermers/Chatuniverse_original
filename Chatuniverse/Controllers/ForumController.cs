@@ -15,8 +15,8 @@ namespace Chatuniverse.Controllers
         public IActionResult CreateForum(ForumViewModel Onpost)
         {
             Forum forum = new Forum(Onpost.ForumTitel, Onpost.Desciption);
-            forum.CreateForum();
-            ViewBag.Created = "Forum got Created";
+            string result = forum.CreateForum();
+            ViewBag.Created = result;
             return View();
         }
 

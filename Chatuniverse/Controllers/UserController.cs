@@ -15,7 +15,7 @@ namespace Chatuniverse.Controllers
         public IActionResult CreateUser(UserViewModel Onpost)
         {
             User user = new User(Onpost.Username, Onpost.Password);
-            user.CreateUser();
+            user.CreateUser(Onpost.Username, Onpost.Password);
             return View();
         }
 
@@ -27,11 +27,11 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult Login(UserViewModel onpost)
         {
-            User user = new User(onpost.Username, onpost.Password);
             UserContainer usercontainer = new UserContainer();
-            if(user.LoginUser() == true)
+            User user = usercontainer.GetUserByUsernamePassword(onpost.Username, onpost.Password);
+            if(user.Username != null)
             {
-                HttpContext.Session.SetInt32("Id", usercontainer.GetUserByUsername(onpost.Username).Id) ;
+                HttpContext.Session.SetInt32("Id", usercontainer.GetUserByUsernamePassword(onpost.Username,onpost.Password).Id) ;
                 HttpContext.Session.SetString("Username", onpost.Username);
                 ViewBag.Message = "You are Logged in";
             }
@@ -56,14 +56,15 @@ namespace Chatuniverse.Controllers
         public IActionResult JoinForum(int id)
         {
             ForumContainer forumcontainer = new ForumContainer();
+            UserContainer usercontainer = new UserContainer();
             Forum forum = forumcontainer.GetForumById(id);
             if (HttpContext.Session.GetInt32("Id") != null)
             {
                 int userid = (int)HttpContext.Session.GetInt32("Id");
                 User user = new User(userid);
-                if(forum.IsUserInForum(userid) == false )
+                if(usercontainer.GetUserById(userid).Username != null )
                 {
-                    user.JoinForum(id);
+                    user.JoinForum(id,userid);
                 }
                 else
                 {
