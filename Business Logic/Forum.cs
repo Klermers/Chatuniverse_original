@@ -10,7 +10,7 @@ namespace Business_Logic
 {
     public class Forum
     {
-        private IForum forumrepository = new Forumrepository(new ForumSQL());
+        private IForum forumrepository;
 
         public int Id
         {
@@ -44,20 +44,10 @@ namespace Business_Logic
             ForumTitel = forumdto.Name;
             Desciption = forumdto.Description;
         }
-        public Forum(string forumtitel, string description)
-        {
-            ForumTitel = forumtitel;
-            Desciption = description;
-        }
 
-        public Forum(int id)
+        public Forum(IConnectionString conn)
         {
-            Id = id;
-        }
-
-        public Forum(IForumRepository forum)
-        {
-            forumrepository = forum;
+            forumrepository = new Forumrepository(new ForumSQL(conn));
         }
 
         public Forum(ForumDTO forumdto, List<Post> posts, List<User> users)
@@ -69,11 +59,11 @@ namespace Business_Logic
             Users = users;
         }
 
-        public string CreateForum()
+        public string CreateForum(string forumtitel, string description)
         {
-            if(ForumTitel.Length >= 10 && Desciption.Length > 20)
+            if(forumtitel.Length >= 10 && forumtitel.Length > 20)
             {
-                forumrepository.CreateForum(ForumTitel, Desciption);
+                forumrepository.CreateForum(forumtitel, forumtitel);
                 return "forum is Created";
             }
             else
@@ -82,11 +72,11 @@ namespace Business_Logic
             }
         }
 
-        public string UpdateForum_Description()
+        public string UpdateForum_Description(int id, string description)
         {
-            if(Desciption.Length > 20)
+            if(description.Length > 20)
             {
-                forumrepository.UpdateForum_Description(Id, Desciption);
+                forumrepository.UpdateForum_Description(id,description);
                 return "Desciption got changed";
             }
             else

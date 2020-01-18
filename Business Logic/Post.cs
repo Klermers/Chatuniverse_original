@@ -53,21 +53,16 @@ namespace Business_Logic
             User = user;
         }
 
-        public Post(string posttitel)
-        {
-            Posttitel = posttitel;
-        }
-
         public Post(IPostRepository post)
         {
             postrepository = post;
         }
 
-        public string CreatePost(int forumid, int userid)
+        public string CreatePost(int forumid, int userid`, string posttitel)
         {
-            if(Posttitel.Length >= 10)
+            if(posttitel.Length >= 10)
             {
-                postrepository.CreatePost(forumid, Posttitel, userid);
+                postrepository.CreatePost(forumid, posttitel, userid);
                 return "Post is Created";
             }
             else

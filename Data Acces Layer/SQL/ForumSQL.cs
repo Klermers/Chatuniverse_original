@@ -9,11 +9,16 @@ namespace Data_Acces_Layer.SQL
     public class ForumSQL : IForumContext
     {
         MySqlConnection conn;
-        string connectionstring = "Server=studmysql01.fhict.local;Uid=dbi393712;Database=dbi393712;Pwd=catlover1214;";       
+        IConnectionString Connectionstring;
+
+        public ForumSQL(IConnectionString connmectionstring)
+        {
+            Connectionstring = connmectionstring;
+        }
 
         public void CreateForum(string name, string description)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "INSERT INTO Forum(Name,Description) VALUES(@Name,@Description)";
@@ -32,7 +37,7 @@ namespace Data_Acces_Layer.SQL
             ForumDTO forumdto = new ForumDTO();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     conn.Open();
                     string query = "SELECT * from forum WHERE id = @id";
@@ -60,7 +65,7 @@ namespace Data_Acces_Layer.SQL
         //this method updates the discription of a signle forum
         public void UpdateForum_Description(int id, string description)
         {
-            using (conn = new MySqlConnection(connectionstring))
+            using (conn = new MySqlConnection(Connectionstring.Connstring))
             {
                 conn.Open();
                 string query = "UPDATE forum SET [Description] = @Description WHERE [id] = @id";
@@ -78,7 +83,7 @@ namespace Data_Acces_Layer.SQL
             List<ForumDTO> forumdtos = new List<ForumDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -109,7 +114,7 @@ namespace Data_Acces_Layer.SQL
             List<ForumDTO> forumdtos = new List<ForumDTO>();
             try
             {
-                using (conn = new MySqlConnection(connectionstring))
+                using (conn = new MySqlConnection(Connectionstring.Connstring))
                 {
                     string query = "SELECT * FROM `forum` LEFT JOIN post ON forum.Id = post.forum ORDER BY forum.Name DESC";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))

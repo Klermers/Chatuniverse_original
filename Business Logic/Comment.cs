@@ -42,44 +42,33 @@ namespace Business_Logic
             User = user;
         }
 
-        public Comment(string text)
-        {
-            Text = text;
-        }
-
-        public Comment(int id,string text)
-        {
-            Id = id;
-            Text = text;
-        }
-
         public Comment(ICommentRepository comment)
         {
             commentrepository = comment;
         }
 
-        public string CreateComment(int postid, int userid)
+        public string CreateComment(int postid, int userid, string text)
         {
-            if(Text.Length < 20)
+            if(text.Length < 20)
             {
                 return "You need a minimum of 20 letters";
             }
             else
             {
-                commentrepository.CreateComment(Text, postid, userid);
+                commentrepository.CreateComment(text, postid, userid);
                 return "Comment is created ";
             }
         }
 
-        public string UpdateComment_Text()
+        public string UpdateComment_Text(int id, string text)
         {
-            if (Text.Length < 20)
+            if (text.Length < 20)
             {
                 return "You need a minimum of 20 letters";
             }
             else
             {
-                commentrepository.UpdateComment_Comment(Id, Text);
+                commentrepository.UpdateComment_Comment(id, text);
                 return "Comment is Changed ";
             }
         }

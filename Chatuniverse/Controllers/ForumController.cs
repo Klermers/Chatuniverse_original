@@ -6,16 +6,25 @@ using Chatuniverse.Models;
 using Microsoft.AspNetCore.Mvc;
 using Business_Logic;
 using DTO;
+using ChatUniverseInterface;
 
 namespace Chatuniverse.Controllers
 {
     public class ForumController : Controller
     {
+        private readonly string constring;
+        private readonly IConnectionString connectionstring;
+
+        public ForumController(IConnectionString connectionString)
+        {
+            this.connectionstring = connectionString;
+        }
+        
         [HttpPost]
         public IActionResult CreateForum(ForumViewModel Onpost)
         {
-            Forum forum = new Forum(Onpost.ForumTitel, Onpost.Desciption);
-            string result = forum.CreateForum();
+            Forum forum = new Forum(new repos);
+            string result = forum.CreateForum(Onpost.ForumTitel,Onpost.Desciption);
             ViewBag.Created = result;
             return View();
         }

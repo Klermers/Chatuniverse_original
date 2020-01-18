@@ -6,10 +6,9 @@ namespace ChatUniverseInterface
 {
     public interface IConnectionString
     {
-        string Connectionstring
+        string Connstring
         {
             get;
-            set;
         }
     }
 }

@@ -22,9 +22,9 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreateComment(CommentViewModel Commentmodel, int postid, int userid)
         {
-            Comment comment = new Comment(Commentmodel.Text);
+            Comment comment = new Comment();
 
-            comment.CreateComment(postid, userid);
+            comment.CreateComment(postid, userid, Commentmodel.Text);
             return View();
         }
         public ActionResult CreateComment()

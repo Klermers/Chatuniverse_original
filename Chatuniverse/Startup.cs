@@ -36,9 +36,7 @@ namespace Chatuniverse
                 options.Cookie.IsEssential = true;
             });
             string DefaultConnection = Configuration.GetConnectionString("DefaultConnection");
-            string CustomConntection = Configuration.GetConnectionString("CustomConntection");
-            ConnectionString.CustomConnection = CustomConntection;
-            ConnectionString.DefaultConnection = DefaultConnection;
+            services.AddSingleton<IConnectionString>(new Connectionstring(DefaultConnection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

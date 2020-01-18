@@ -42,17 +42,6 @@ namespace Business_Logic
             Date = userdto.CreationDate;
         }
 
-        public User(int userid)
-        {
-            Id = userid;
-        }
-
-        public User(string username, string password)
-        {
-            Username = username;
-            Password = password;
-        }
-
         public User(IUserRepository user)
         {
             userrepository = user;
@@ -71,7 +60,7 @@ namespace Business_Logic
             }
         }
 
-        public string LeaveForum(int forumid)
+        public string LeaveForum(int forumid, int userid)
         {
             if(Username == null)
             {
@@ -79,7 +68,7 @@ namespace Business_Logic
             }
             else
             {
-                userrepository.LeaveForum(forumid, Id);
+                userrepository.LeaveForum(forumid, userid);
                 return "You left the forum";
             }
         }

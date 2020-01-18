@@ -16,8 +16,8 @@ namespace Chatuniverse.Controllers
         [HttpPost]
         public IActionResult CreatePost(PostViewModel postmodel, int forumid, int userid)
         {
-            Post post = new Post(postmodel.Posttitel);
-            post.CreatePost(forumid, userid);
+            Post post = new Post();
+            post.CreatePost(forumid, userid,postmodel.Posttitel);
 
             return View();
         }
