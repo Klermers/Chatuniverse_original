@@ -20,11 +20,11 @@ namespace Business_Logic
             private set;
         }
 
-        public ForumContainer(IConnectionString conn)
+        public ForumContainer(IForumContainer forum, IPostContainer post, IUserContainer user, ICommentContainer comment)
         {
-            forumrepository = new Forumrepository(new ForumSQL(conn));
-            postContainer = new PostContainer(conn);
-            userContainer = new UserContainer(conn);
+            forumrepository = forum;
+            postContainer = new PostContainer(post,comment,user);
+            userContainer = new UserContainer(user);
         }
 
         public void GetAllForums()

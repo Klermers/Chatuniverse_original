@@ -25,11 +25,11 @@ namespace Business_Logic
 
         }
 
-        public PostContainer(IConnectionString conn)
+        public PostContainer(IPostContainer post, ICommentContainer comment, IUserContainer user)
         {
-            postrepository = new Postrepository(new PostSQL(conn));
-            commentContainer = new CommentContainer(conn);
-            userContainer = new UserContainer(conn);
+            postrepository = post;
+            commentContainer = new CommentContainer(comment,user);
+            userContainer = new UserContainer(user);
         }
 
         public void GetAllPostsByForumId(int forumid)

@@ -45,9 +45,9 @@ namespace Business_Logic
             Desciption = forumdto.Description;
         }
 
-        public Forum(IConnectionString conn)
+        public Forum(IForumRepository forum)
         {
-            forumrepository = new Forumrepository(new ForumSQL(conn));
+            forumrepository = forum;
         }
 
         public Forum(ForumDTO forumdto, List<Post> posts, List<User> users)

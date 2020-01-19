@@ -42,9 +42,9 @@ namespace Business_Logic
             User = user;
         }
 
-        public Comment(IConnectionString conn)
+        public Comment(ICommentRepository comment)
         {
-            commentrepository = new Commentrepository(new CommentSQL(conn));
+            commentrepository = comment;
         }
 
         public string CreateComment(int postid, int userid, string text)

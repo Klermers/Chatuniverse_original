@@ -53,9 +53,9 @@ namespace Business_Logic
             User = user;
         }
 
-        public Post(IConnectionString conn)
+        public Post(IPostRepository post)
         {
-            postrepository = new Postrepository(new PostSQL(conn));
+            postrepository = post;
         }
 
         public string CreatePost(int forumid, int userid, string posttitel)

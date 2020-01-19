@@ -42,9 +42,9 @@ namespace Business_Logic
             Date = userdto.CreationDate;
         }
 
-        public User(IConnectionString conn)
+        public User(IUserRepository user)
         {
-            userrepository = new Userrepository(new UserSQL(conn));
+            userrepository = user;
         }
 
         public string CreateUser(string username , string password)

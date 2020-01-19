@@ -18,9 +18,9 @@ namespace Business_Logic
             private set;
         }
 
-        public UserContainer(IConnectionString conn)
+        public UserContainer(IUserContainer user)
         {
-            userRepositoryContainer = new Userrepository(new UserSQL(conn));
+            userRepositoryContainer = user;
         }
 
         public void GetAllUsersByForumId(int forumid)
